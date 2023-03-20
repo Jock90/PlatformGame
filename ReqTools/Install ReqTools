@@ -1,0 +1,1142 @@
+;
+; $VER: Install ReqTools 2.8 (14.1.97)
+;
+; Installer script for ReqTools.
+;
+
+(set #danish-lang        1)
+(set #german-lang        2)
+(set #english-lang       4)
+(set #spanish-lang       8)
+(set #french-lang       16)
+(set #italian-lang      32)
+(set #hungarian-lang    64)
+(set #dutch-lang       128)
+(set #norwegian-lang   256)
+(set #polish-lang      512)
+(set #portugues-lang  1024)
+(set #russian-lang    2048)
+(set #serbian-lang    4096)
+(set #finnish-lang    8192)
+(set #swedish-lang   16384)
+(set #czech-lang     32768)
+
+
+; Get current language (no need for lots of silly icons! ;). However, this
+; won't properly work for all versions of the Installer. Some don't
+; understand the language "default" in the tool types... :/
+
+(if (= (exists "Env:Language") 1)
+	; GetEnv reports "String too long" if the variable doesn't exist! :/
+	; Dunno if this is fixed in V43... But we need to check anyway.
+	(set @language (getenv "language"))
+)
+
+
+;**************************************************************************
+;
+; English strings
+;
+
+(set #default-lang #english-lang)
+
+(set #builtin-lang "(built in)")
+
+(set #bad-kick
+	"You must have AmigaOS Release 2.04 or higher to use ReqTools."
+)
+
+(set #welcome
+	(cat
+		"\n\nWelcome to the ReqTools installation utility.\n\n"
+		"This program lets you install ReqTools and related "
+		"programs on your Amiga.\n\n"
+		"Read ReqTools.guide for information on the "
+		"distribution and commercial usage of ReqTools.\n\n"
+		"ReqTools © 1991-94 Nico François, 1995-97 Magnus Holmgren."
+	)
+)
+
+(set #install-parts "Please select the parts you wish to install")
+
+(set #item-library "reqtools.library")
+
+(set #item-prefs "ReqTools preferences")
+
+(set #item-ca-prefs "ReqTools preferences using ClassAct")
+
+(set #item-guide "ReqTools.guide")
+
+(set #item-locale "Translations")
+
+(set #item-patch "RTPatch")
+
+(set #parts-header-help
+	(cat
+		"    Here you select the different parts of ReqTools that you would like to "
+		"install. After that, you select the details of the installation (such as "
+		"where the different files should be installed). You may choose to install "
+		"the following items:\n"
+	)
+)
+
+(set #item-library-help
+	(cat
+		"    ReqTools.library: This is the central part of ReqTools. A so called "
+		"shared library containing the available (requester) functions.\n"
+	)
+)
+
+(set #item-prefs-help
+	(cat
+		"    ReqTools preferences: With this program you can fine-tune how the "
+		"different ReqTools requesters should behave, though the programs "
+		"actually using ReqTools have the final word on this.\n"
+	)
+)
+
+(set #item-ca-prefs-help
+	(cat
+		"    ReqTools preferences using ClassAct: This program does the same "
+		"as ReqTools preferences. The difference is that this program uses "
+		"ClassAct for its user interface, which makes it look and feel a bit "
+		"different. The functionality is the same though. You need to have "
+		"ClassAct installed in order to use this version of the preferences "
+		"program. ClassAct is NOT included with ReqTools.\n"
+	)
+)
+
+(set #item-guide-help
+	(cat
+		"    ReqTools.guide: The manual, in AmigaGuide® format. It contains "
+		"some general information about ReqTools, and documentation over "
+		"the preferences program and RTPatch.\n"
+	)
+)
+
+(set #item-local-help
+	(cat
+		"    Tranlsations: If you install a translation, then ReqTools (both "
+		"reqtools.library and the preferences editor) can operate in the "
+		"language(s) you select.\n"
+	)
+)
+
+(set #item-patch-help
+	(cat
+		"    RTPatch: A small support program that will re-route functions from "
+		"most popular requester libraries to ReqTools. It also improves some "
+		"system requesters (in Intuition).\n"
+	)
+)
+
+(set #parts-footer-help
+	(cat
+		"    For more information about these items, please see the manual. "
+		"The items selected by default are based on your current "
+		"configuration. E.g., the ClassAct version of ReqTools preferences "
+		"is only selected if ClassAct seems to be installed.\n"
+	)
+)
+
+; Only for expert users
+(set #where-library "Where would you like to install reqtools.library?")
+
+(set #where-library-help
+	(cat
+		"    reqtools.library is a shared library. As such, the system "
+		"(and applications using ReqTools) expects this file to be "
+		"avilable via the \"Libs:\"-assign, so please install this "
+		"file into the \"Libs:\" drawer, or make sure that the "
+		"drawer you install it in will be a part of your "
+		"\"Libs:\"-assign.\n"
+	)
+)
+
+(set #where-prefs "Where would you like to install the preferences program?")
+
+(set #where-prefs-help
+	(cat
+		"    As a preferences editor, a good location to install the program "
+		"in could be where the other preferences editors are located, "
+		"namely in \"Sys:Prefs\". However, there is no requirement to "
+		"install it there, so you can place it whereever you find "
+		"convenient.\n"
+	)
+)
+
+(set #where-ca-prefs
+	"Where would you like to install the preferences program (the ClassAct version)?"
+)
+
+(set #where-ca-prefs-help #where-prefs-help)
+
+(set #where-guide "Where would you like to install ReqTools.guide?")
+
+(set #where-guide-help
+	(cat
+		"    ReqTools.guide is a file in the standard AmigaGuide® format. "
+		"As ReqTools (either the library or the preferences editor) "
+		"currently makes specific use of this file, you can install "
+		"it whereever you find convenient. If you have OS 3.0 or higher, "
+		"one such place is \"Help:\", as this is where other AmigaGuide® "
+		"files often are installed.\n"
+	)
+)
+
+; Only for expert users, and an icon wasn't found
+(set #copy-guide-icon "Do you want to install the icon for ReqTools.guide?")
+
+(set #copy-guide-icon-help
+	(cat
+		"    Since you stated that you are an expert user, and there currently "
+		"is no icon for ReqTools.guide where you selected to install it, "
+		"you get a chance to decide if the icon should be installed as well.\n"
+	)
+)
+
+(set #which-language "Which languages should be installed?")
+
+(set #which-language-help
+	(cat
+		"    The Amiga can be operated in many different languages. If you "
+		"want Visage to use the same language as your Amiga Workbench, "
+		"then a couple of catalog files must be copied to your harddisk "
+		"for each language supported.\n"
+		"    To reduce the amount of space consumed by the language files, "
+		"you can select to have only the files of specific languages "
+		"copied.\n"
+		"    Simply check the boxes of the languages you wish to have have "
+		"available on your system.\n"
+	)
+)
+
+(set #where-patch "Where would you like to install RTPatch?")
+
+(set #where-patch-help
+	(cat
+		"    If you want RTPatch to be automatically started each time "
+		"your Amiga starts, then you can place RTPatch in the drawer "
+		"\"Sys:WBStartup\". Otherwise select any drawer you find convenient, "
+		"though a drawer in the command search path would be a good idea.\n"
+		"    Please note that RTPatch requires that no program is currently "
+		"using either Asl, Arp or the Req libraries when RTPatch is started. "
+		"Thus, RTPatch in the WBStartup-drawer might not work. If that is the "
+		"case, make sure RTPatch have the highest start priority (set with "
+		"the STARTPRI tooltype), and that no program that uses any of the "
+		"above mentioned libraries is started in your \"S:User-Startup\"-file. "
+		"This is normally not the case.\n"
+		"    Please see the manual for details on RTPatch, and how to "
+		"configure it.\n"
+	)
+)
+
+(set #convert-guide "Converting ReqTools.guide...")
+
+(set #copy "Copying %s to %s...")
+
+;**************************************************************************
+;
+; German strings
+;
+
+(if (= @language "deutsch")
+	(
+		(set #default-lang #german-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Spanish strings
+;
+
+(if (= @language "español")
+	(
+		(set #default-lang #spanish-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; French strings
+;
+
+(if (= @language "francais")
+	(
+		(set #default-lang #french-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Italian strings
+;
+
+(if (= @language "italiano")
+	(
+		(set #default-lang #italian-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Norwegian strings
+;
+
+(if (= @language "norsk")
+	(
+		(set #default-lang #norwegian-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Russian strings
+;
+
+(if (= @language "russian")
+	(
+		(set #default-lang #russian-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Serbian strings
+;
+;
+
+; .ct
+(if (= @language "srpski")
+	(
+		(set #default-lang #serbian-lang)
+
+		(set #builtin-lang "(ugraÐen)")
+
+		(set #bad-kick
+			"Morate imati AmigaOS verzija 2.04 ili noviji da bi koristili ReqTools."
+		)
+
+		(set #welcome
+			(cat
+				"\n\nDobrodoçli u program za instalaciju ReqTools-a.\n\n"
+				"Pomo†u ovog programa mo§ete instalirati ReqTools i "
+				"povezane programe na vaçu Amigu.\n\n"
+				"ProŸitajte ReqTools.guide za viçe informacija o "
+				"distribuciji i komercijalnom koriç†enju ReqTools-a.\n\n"
+				"ReqTools © 1991-94 Nico Francois, 1995-97 Magnus Holmgren."
+			)
+		)
+
+		(set #install-parts "Odaberite delove koje §elite da instalirate")
+
+		(set #item-library "reqtools.library")
+
+		(set #item-prefs "ReqTools preference")
+
+		(set #item-ca-prefs "ReqTools preference (ClassAct verzija)")
+
+		(set #item-guide "ReqTools.guide")
+
+		(set #item-locale "Prevodi")
+
+		(set #item-patch "RTPatch")
+
+		(set #parts-header-help
+			(cat
+				"    Ovde birate koje delove ReqTools paketa §elite da instalirate. "
+				"Posle toga birate detalje instalacije tj. gde †e odreÐeni fajlovi "
+				"biti instalirani. Mo§ete odabrati slede†e elemente:\n"
+			)
+		)
+
+		(set #item-library-help
+			(cat
+				"    ReqTools.library: Glavni deo ReqTools paketa. To je tzv. "
+				"\" deljena\" biblioteka (upitniŸkih) funkcija.\n"
+			)
+		)
+
+		(set #item-prefs-help
+			(cat
+				"    ReqTools preference: ovim programom mo§ete podesiti "
+				"ponaçanje raznih ReqTools upitnika, mada programi koji koriste "
+				"ReqTools imaju zadnju reŸ po tom pitanju.\n"
+			)
+		)
+
+		(set #item-ca-prefs-help
+			(cat
+				"    ReqTools preference (ClassAct verzija): Ovaj program radi isto "
+				"çto i ReqTools preference. razlika je tome çto ovaj program koristi "
+				"ClassAct za korisniŸki interfejs, çto ga Ÿini neçto drugaŸijim."
+				"MeÐutim funkcionalnost je ista. TakoÐe treba da imate instaliran "
+				"ClassAct da bi koristili ovu verziju preferenci. ClassAct NIJE "
+				"u u paketu sa ReqTools-om.\n"
+			)
+		)
+
+		(set #item-guide-help
+			(cat
+				"    ReqTools.guide: Uputstvo u AmigaGuide® formatu. Sadr§i neke "
+				"opçte informacije o ReqTools-u, kao i dokumentaciju prefs programa "
+				"i RTPatch-a.\n"
+			)
+		)
+
+		(set #item-local-help
+			(cat
+				"    Prevodi: Ako instalirate prevod, onda †e ReqTools (i "
+				"reqtools.library i editor preferenci) raditi na jeziku koji "
+				"ste odabrali.\n"
+			)
+		)
+
+		(set #item-patch-help
+			(cat
+				"    RTPatch: Mali dodatni program prebacuje funkcije najpopularnijih "
+				"koji preusmerava upitnike na ReqTools. TakoÐe poboljçava sistemske "
+				"upitnike (u Intuiticiji).\n"
+			)
+		)
+
+		(set #parts-footer-help
+			(cat
+				"    Za viçe informacija o ovim elemenatima, pogledajte u "
+				"uputstvo. Elementi odabrani pri startovanju odra§avaju vaçu "
+				"konfiguraciju. Na primer, ClassAct verzija ReqTools preferenci "
+				"bi†e odabrana ako izgleda da je ClassAct instaliran.\n"
+			)
+		)
+
+		; Only for expert users
+		(set #where-library "Gde §elite da instalirate reqtools.library?")
+
+		(set #where-library-help
+			(cat
+				"    reqtools.library je "deljena" biblioteka. Kao takva, sistem "
+				"(i aplikacije koje koriste ReqTools) oŸekuju da fajl bude "
+				"dostupan kroz \"Libs:\" asajn, zato vas molimo da instalirate "
+				"fajl u \"Libs:\" direktorijum, ili u direktorijum koji je deo "
+				"\"Libs:\" asajna.\n"
+			)
+		)
+
+		(set #where-prefs "Gde §elite da instalirate prefs program?")
+
+		(set #where-prefs-help
+			(cat
+				"    Kao prefs editor, dobro mesto za instaliranje programa "
+				"moglo bi da bude direktorijum gde su instalirani ostali "
+				"prefs programi tj. \"Sys:Prefs\". Nije obavezno da ga  "
+				"instalirate u taj direktorijum, pa ga mo§ete staviti "
+				"gde god §elite.\n"
+			)
+		)
+
+		(set #where-ca-prefs
+			"gde §elite da instalirate prefs program (ClassAct verzija)?"
+		)
+
+		(set #where-ca-prefs-help #where-prefs-help)
+
+		(set #where-guide "Gde §elite da instalirate ReqTools.guide?")
+
+		(set #where-guide-help
+			(cat
+				"    ReqTools.guide je fajl u standardnom AmigaGuide® formatu. "
+				"Kako ReqTools (bilo bilioteka ili prefs editor) trenutno "
+				"specifiŸno korite ovaj fajl, mo§ete ga instalirati gde god "
+				"§elite. Ako imate AmigaOS 3.0 ili viçi, dobro mesto je "
+				"\"Help:\" direktorijum, jer je to mesto gde se AmigaGuide® "
+				"fajlovi Ÿesto instaliraju.\n"
+			)
+		)
+
+		; Only for expert users, and an icon wasn't found
+		(set #copy-guide-icon "Da li §elite da instalirate ikonu za ReqTools.guide?")
+
+		(set #copy-guide-icon-help
+			(cat
+				"    Poçto ste naglasili da ste iskusan korisnik, a trenutno nema "
+				"ikone za ReqTools.guide tamo gde §elite da ga instalirate, "
+				"imate priliku da odaberete da li §elite da je instalirate.\n"
+			)
+		)
+
+		(set #which-language "Koje jezike §elite da instalirate?")
+
+		(set #which-language-help
+			(cat
+				"    Amiga mo§e da radi na razliŸitim jezicima. Ako §elite da "
+				"Visage koristi isti jezik kao vaç VorkbenŸ, onda mora biti "
+				"kopirano nekoliko katalog fajlova na hard disk za svaki "
+				"podr§ani jezik.\n"
+				"    Da bi se smanjilo mesto potrebno kataloge, mo§ete odabrati "
+				"da se koriraju samo fajlovi odreÐenog jezika.\n"
+				"    Samo obele§ite koje jezike §elite da imate u vaçem sistemu.\n"
+			)
+		)
+
+		(set #where-patch "Gde §elite da instalirate RTPatch?")
+
+		(set #where-patch-help
+			(cat
+				"    Ako §elite da se RTPatch startuje svaki put kad startujete "
+				"Amigu , onda stavite RTPatch u direktorijum \"Sys:WBStartup\". "
+				"U drugom sluŸaju odaberite slobodno gde §elite da ga instalirate, "
+				"ali bi dobro bilo da to bude u negde u path-u.\n"
+				"    Poçto RTPatch zahteva da nijedan drugi program ne koristi "
+				"bilo Asl, Arp ili Req biblioteke kada je RTPatch startovan. "
+				"Zbog toga, RTPatch u WBStartup direktorijumu mo§da ne†e raditi. "
+				"U tom sluŸaju potrudite se da RTPatch ima najviçi prioritet "
+				"startovanja (podesite to preko STARTPRI tul tajpa), kao i to "
+				"da nijedan program koji se koristi pomenute biblioteke nije "
+				"startovan u \"S:User-Startup\" fajlu. To uglavnom nije sluŸaj.\n"
+				"    Za detalje o RTPatch-u, kao i za informacije o podeçavanju "
+				"pogladajte u uputstvo.\n"
+			)
+		)
+
+		(set #convert-guide "Konvertujem ReqTools.guide...")
+
+		(set #copy "Kopiram %s u %s...")
+	)
+)
+
+
+;**************************************************************************
+;
+; Finnish strings
+;
+
+; .ct
+(if (= @language "suomi")
+	(
+		(set #default-lang #finnish-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; Swedish strings
+;
+
+(if (= @language "svenska")
+	(
+		(set #default-lang #swedish-lang)
+
+		(set #builtin-lang "(inbyggt)")
+
+		(set #bad-kick
+			"Du måste ha AmigaOS version 2.04 eller högre för att använda ReqTools."
+		)
+
+		(set #welcome
+			(cat
+				"\n\nVälkommen till Installeraren.\n\n"
+				"Det här programmet låter dig installera ReqTools och "
+				"relaterade program i din Amiga.\n\n"
+				"Läs ReqTools.guide för information om distributionen "
+				"och det kommersiella användandet av ReqTools.\n\n"
+				"ReqTools © 1991-94 Nico François, 1995-97 Magnus Holmgren."
+			)
+		)
+
+		(set #install-parts "Välj de delar du vill installera")
+
+		(set #item-library "reqtools.library")
+
+		(set #item-prefs "ReqTools inställningar")
+
+		(set #item-ca-prefs "ReqTools inställningar, använder ClassAct")
+
+		(set #item-guide "ReqTools.guide")
+
+		(set #item-locale "Översättningar")
+
+		(set #item-patch "RTPatch")
+
+		(set #parts-header-help
+			(cat
+				"  Här väljer du de olika delarna av ReqTools som du "
+				"installera. Efter det anger du detaljerna om "
+				"installationen (såsom var de olika filerna ska "
+				"installeras). Du kan välja mellan följande delar:\n"
+			)
+		)
+
+		(set #item-library-help
+			(cat
+				"  ReqTools.library: Det här är den centrala delen av "
+				"ReqTools. Ett så kallat delat bibliotek (eng. shared "
+				"library) som innehåller de olika (dialogrute)"
+				"funktionerna.\n"
+			)
+		)
+
+		(set #item-prefs-help
+			(cat
+				"  ReqTools inställningar: Med det här programmet kan du "
+				"justera hur de olika dialogrutorna i ReqTools ska "
+				"uppträda, även om programmet som använder ReqTools "
+				"har sista ordet om detta.\n"
+			)
+		)
+
+		(set #item-ca-prefs-help
+			(cat
+				"  ReqTools inställningar, använder ClassAct: Det här "
+				"programmet gör samma saker som ReqTools inställningar. "
+				"Skillnaden är att det här programmet använder ClassAct "
+				"för sitt användargränssnitt, vilket gör att det ser "
+				"lite annorlunda ut. Funktionaliteten är dock densamma. "
+				"Du behöver ha ClassAct installerat för att kunna "
+				"använda den här versionen av inställningsredigeraren. "
+				"ClassAct följer INTE med ReqTools.\n"
+			)
+		)
+
+		(set #item-guide-help
+			(cat
+				"  ReqTools.guide: Manualen, i AmigaGuide®-format. Den "
+				"innehåller en del allmän information om ReqTools, samt "
+				"dokumentation för inställningsredigeraren och "
+				"RTPatch.\n"
+			)
+		)
+
+		(set #item-local-help
+			(cat
+				"  Översättningar: Om du installerar en översättning, så "
+				"kan ReqTools (både reqtools.library och "
+				"inställningsredigeraren) använda de språk du väljer.\n"
+			)
+		)
+
+		(set #item-patch-help
+			(cat
+				"  RTPatch: Ett litet extra program, som dirigerar om "
+				"dialogrutefunktioner från de vanligaste "
+				"\"dialogrutebiblioteken\" till ReqTools. Programmet "
+				"förbättrar även några systemdialogrutor (i Intuition).\n"
+			)
+		)
+
+		(set #parts-footer-help
+			(cat
+				"  För mer information om de olika delarna, se manualen. "
+				"Vilka delar som är förvalda beror på din konfiguration. "
+				"Till exempel så förväljs den ClassAct-baserade versionen "
+				"av ReqTools inställningar om ClassAct verkar vara "
+				"installerad.\n"
+			)
+		)
+
+		; Only for expert users
+		(set #where-library "Var vill du installera reqtools.library?")
+
+		(set #where-library-help
+			(cat
+				"  reqtools.library är ett delat bibliotek. Som sådant "
+				"förväntar sig systemet (och program som använder "
+				"ReqTools) att denna filen finns tillgänglig via "
+				"tilldelningen \"Libs:\". Du bör alltså installera "
+				"den här filen i \"Libs:\"-lådan, eller se till att "
+				"den låda du installerar den i kommer att bli en del "
+				"av din \"Libs:\"-tilldelning.\n"
+			)
+		)
+
+		(set #where-prefs "Var vill du installera ReqTools inställningar?")
+
+		(set #where-prefs-help
+			(cat
+				"  Eftersom det är en inställningsredigerare, så "
+				"är ett lämpligt ställe för programmet den låda "
+				"där de andra inställningsredigerarna finns, det "
+				"vill säga i \"Sys:Prefs\". Det finns dock inte "
+				"något krav på att installera den där, så du kan "
+				"installera programmet där du finner det "
+				"lämpligt.\n"
+			)
+		)
+
+		(set #where-ca-prefs
+			"Var vill du installera ReqTools inställningar (ClassAct-versionen)?"
+		)
+
+		(set #where-ca-prefs-help #where-prefs-help)
+
+		(set #where-guide "Var vill du installera ReqTools.guide?")
+
+		(set #where-guide-help
+			(cat
+				"  ReqTools.guide är en fil i AmigaGuide®-format. "
+				"Då ReqTools (varken biblioteket eller "
+				"inställningsredigeraren) för tillfället använder "
+				"denna fil till något speciellt, så kan du installera "
+				"den där du finner det lämpligt. Om du har OS 3.0 "
+				"eller högre, så kan ett lämpligt ställe vara "
+				"\"Help:\", eftersom andra AmigaGuide®-filer ofta "
+				"installeras där.\n"
+			)
+		)
+
+		; Only for expert users, and an icon wasn't found
+		(set #copy-guide-icon "Vill du installera ikonen för ReqTools.guide?")
+
+		(set #copy-guide-icon-help
+			(cat
+				"  Eftersom du angav att du är en expertanvändare, "
+				"och det för tillfället inte finns någon ikon för "
+				"ReqTools.guide där du valde att installera "
+				"ReqTools.guide, får du här en möjlighet att "
+				"avgöra om ikonen också ska installeras.\n"
+			)
+		)
+
+		(set #which-language "Vilka språk ska installeras?")
+
+		(set #which-language-help
+			(cat
+                                "  Amigan kan arbeta med flera olika språk. Om du vill att "
+                                "Visage ska använda samma språk som Amiga Workbench så "
+                                "måste en så kallad katalogfil kopieras till din systemdisk "
+                                "för varje språk.\n"
+                                "  För att minimera diskutrymmet för språkfiler kan du välja "
+                                "att bara installera filerna för vissa språk.\n"
+                                "  Markera bara rutorna för de språk du önskar installera i "
+                                "din dator.\n"
+			)
+		)
+
+		(set #where-patch "Var vill du installera RTPatch?")
+
+		(set #where-patch-help
+			(cat
+				"  Om du vill att RTPatch ska startas automatiskt varje "
+				"gång din Amiga startar, så kan du placera RTPatch i lådan "
+				"\"Sys:WBStartup\". Annars kan du välja en godtycklig låda "
+				"som du tycker är lämplig, även om en låda i kommandosökvägen "
+				"kan vara en bra ide.\n"
+				"  Lägg märke till att RTPatch kräver att det inte är några "
+				"program som använder antingen Asl-, Arp- eller Req-biblioteken "
+				"när RTPatch startas. På grund av detta kanske det inte "
+				"fungerar att ha RTPatch i WBStartup-lådan. Om så är fallet, "
+				"se till att RTPatch har den högsta startprioriteten (som "
+				"sätts med verktygstypen STARTPRI), och att inga program "
+				"som använder något av ovanstående bibliotek startas i din "
+				"\"S:User-Startup\"-fil. Detta sker normalt sett inte.\n"
+				"  Se manualen för detaljer om RTPatch och om hur du "
+				"konfiugrerar RTPatch.\n"
+			)
+		)
+
+		(set #convert-guide "Konverterar ReqTools.guide...")
+
+		(set #copy "Kopierar %s till %s...")
+	)
+)
+
+;**************************************************************************
+;
+; Czech strings
+;
+
+; .ct
+(if (= @language "ãeótina")
+	(
+		(set #default-lang #czech-lang)
+	)
+)
+
+
+;**************************************************************************
+;
+; The actual installaion script
+;
+; First some initializations
+;
+
+; Check Kickstart version. Exit if not at least 2.04
+(if (< (/ (getversion) 65536) 37)
+        (abort #bad-kick)
+)
+
+; Since files are scatter installed, don't mention any specific location.
+(set @default-dest "")
+
+; Request proportinal fonts, if supported. This string is
+; prepended to the first askoptions choice.
+(if (>= @installer-version 2752518)     ; 42 * 65536 + 6
+	; At least version 42.6
+	(set #propfont "[2p")
+	; Pre V42
+	(set #propfont "")
+)
+
+(set #item-num-lib       1)
+(set #item-num-prefs     2)
+(set #item-num-ca-prefs  4)
+(set #item-num-guide     8)
+(set #item-num-locale   16)
+(set #item-num-patch    32)
+
+; Find out default values for parts to install
+(set #install-default (BITOR #item-num-lib #item-num-prefs #item-num-guide))
+
+; ClassAct installed?
+(if (= 1 (exists "Libs:Gadgets/layout.gadget" (noreq)))
+	(set #install-default (BITOR #install-default #item-num-ca-prefs))
+)
+
+; Locale installed?
+(if (AND (= 2 (exists "Locale:" (noreq))) (< 0 (getversion "locale.library" (resident))))
+	(set #install-default (BITOR #install-default #item-num-locale))
+)
+
+; RTPatch installed? Simplistic check really, but...
+(if (OR (exists "C:RTPatch") (exists "Sys:WBStartup"))
+	(set #install-default (BITOR #install-default #item-num-patch))
+)
+
+; Everything ready
+(message #welcome)
+
+(welcome)
+
+; Ask the user what to install
+(set #install-files
+	(askoptions
+		(prompt	#install-parts)
+		(help	#parts-header-help
+			#item-library-help
+			#item-prefs-help
+			#item-ca-prefs-help
+			#item-guide-help
+			#item-local-help
+			#item-patch-help
+			#parts-footer-help "\n"
+			@askoptions-help)
+		(choices
+			(cat #propfont #item-library)
+			#item-prefs
+			#item-ca-prefs
+			#item-guide
+			#item-locale
+			#item-patch
+		)
+		(default #install-default)
+	)
+)
+
+; Ask the user for the location of all parts
+
+(set #library-dest  "Libs:")
+
+; Location for reqtools.library (for experts)
+(if (AND (= @user-level 2) (BITAND #install-files #item-num-lib))
+	(set #library-dest
+		(askdir
+			(prompt  #where-library)
+			(help    #where-library-help "\n" @askdir-help)
+			(default #library-dest)
+		)
+	)
+)
+
+(set #prefs-dest    "Sys:Prefs")
+
+; Location for preferences (for non-novices)
+(if (AND (<> @user-level 0) (BITAND #install-files #item-num-prefs))
+	(set #prefs-dest
+		(askdir
+			(prompt  #where-prefs)
+			(help    #where-prefs-help "\n" @askdir-help)
+			(default #prefs-dest)
+		)
+	)
+)
+
+(set #ca-prefs-dest #prefs-dest)
+
+; Location for ClassAct preferences (for non-novices)
+(if (AND (<> @user-level 0) (BITAND #install-files #item-num-ca-prefs))
+	(set #ca-prefs-dest
+		(askdir
+			(prompt  #where-ca-prefs)
+			(help    #where-ca-prefs-help "\n" @askdir-help)
+			(default #ca-prefs-dest)
+		)
+	)
+)
+
+; Location for ReqTools.guide
+(if (BITAND #install-files #item-num-guide)
+	(
+		(set #guide-dest "Work:")
+
+		(if (exists "Help:")
+			(set #guide-dest "Help:")
+		)
+
+		(set #guide-dest
+			(askdir
+				(prompt  #where-guide)
+				(help    #where-guide-help "\n" @askdir-help)
+				(default #guide-dest)
+			)
+		)
+
+		(set #dest-guide-name (tackon #guide-dest "Visage.guide.info"))
+
+		(set #guide-icon
+			(if (AND (= @user-level 2 ) (= (exists #dest-guide-name) 0))
+				(askbool
+					(prompt #copy-guide-icon)
+					(help	#copy-guide-icon-help " ")
+				)
+				1	; Default is to copy the icon
+			)
+		)
+	)
+)
+
+; .ct
+; Which languages should be installed?
+(if (BITAND #install-files #item-num-locale)
+	(set #lang
+		(askoptions
+			(prompt	#which-language)
+			(help	#which-language-help "\n" @askoptions-help)
+			(choices
+				(cat #propfont "Dansk")
+				"Deutsch"
+				(cat "English  " #builtin-lang)
+				"Español"
+				"Français"
+				"Italiano"
+				"Magyar"
+				"Nederlands"
+				"Norsk"
+				"Polski"
+				"Português"
+				"Russian"
+				"Srpski"
+				"Suomi"
+				"Svenska"
+				"Ãeótina"
+			)
+			(default #default-lang)
+		)
+	)
+)
+
+; Location for RTPatch
+(if (BITAND #install-files #item-num-patch)
+	(set #patch-dest
+		(askdir
+			(prompt	#where-patch)
+			(help	#where-patch-help "\n" @askdir-help)
+			(default "Sys:WBStartup")
+		)
+	)
+)
+
+
+; Everything set up. Now do the actual installation
+
+(complete 0)
+
+(if (BITAND #install-files #item-num-lib)
+	(
+		(copylib
+			(prompt	(#copy "reqtools.library" #library-dest))
+			(source	"libs/reqtools.library")
+			(dest	#library-dest)
+		)
+	)
+)
+
+(complete 20)
+
+(if (BITAND #install-files #item-num-prefs)
+	(
+		(copylib
+			(prompt	(#copy "ReqTools" #prefs-dest))
+			(source	"Prefs/ReqTools")
+			(dest	#prefs-dest)
+		)
+
+		(copyfiles
+			(prompt (#copy "ReqTools.info" #prefs-dest))
+			(source "Prefs/ReqTools.info")
+			(dest   #prefs-dest)
+		)
+	)
+)
+
+(complete 40)
+
+(if (BITAND #install-files #item-num-ca-prefs)
+	(
+		(copylib
+			(prompt	(#copy "CA_ReqTools" #ca-prefs-dest))
+			(source	"Prefs/CA_ReqTools")
+			(dest	#ca-prefs-dest)
+		)
+
+		(copyfiles
+			(prompt (#copy "CA_ReqTools.info" #ca-prefs-dest))
+			(source "Prefs/CA_ReqTools.info")
+			(dest   #ca-prefs-dest)
+		)
+	)
+)
+
+(complete 60)
+
+(if (BITAND #install-files #item-num-guide)
+	(
+		(set #guide-source "ReqTools.guide")
+
+		(if (> (/ (getversion "Libs:amigaguide.library") 65536) 39)
+			(
+				(working #convert-guide)
+				(run "C/FixAG ReqTools.guide T:ReqTools.guide 3" (safe))
+				(set #guide-source "T:ReqTools.guide")
+			)
+		)
+
+		(copylib
+			(prompt (#copy "ReqTools.guide" #guide-dest))
+			(source #guide-source)
+			(dest   #guide-dest)
+		)
+
+		(if (> (/ (getversion "Libs:amigaguide.library") 65536) 39)
+			(delete "T:ReqTools.guide" (safe))
+		)
+
+		(if #guide-icon
+			(
+				(copyfiles
+					(prompt (#copy "ReqTools.guide.info" #guide-dest))
+					(source "ReqTools.guide.info")
+					(dest   #guide-dest)
+				)
+
+				(if (< (/ (getversion) 65536) 39)
+					(tooltype
+						(dest (tackon destination "ReqTools.guide"))
+						(setdefaulttool "AmigaGuide")
+					)
+				)
+			)
+		)
+	)
+)
+
+(complete 75)
+
+; .ct
+(if (BITAND #install-files #item-num-locale)
+	(
+		(set #n 0)
+
+		(while
+			(set #language
+				(select #n
+					"Dansk"
+					"Deutsch"
+					"English"
+					"Español"
+					"Français"
+					"Italiano"
+					"Magyar"
+					"Nederlands"
+					"Norsk"
+					"Polski"
+					"Português"
+					"Russian"
+					"Srpski"
+					"Suomi"
+					"Svenska"
+					"Ãeótina"
+					""
+				)
+			)
+
+			(
+				(if (AND (IN #lang #n) (<> #language "English"))
+					(
+						(set #catalog
+							(tackon "Catalogs"
+								(tackon #language "reqtools.catalog")
+							)
+						)
+
+						(set #destination (tackon "Locale:Catalogs/" #language))
+
+						(if (exists #catalog)
+							(copylib
+								(prompt (#copy #catalog #destination))
+								(source #catalog)
+								(dest   #destination)
+							)
+						)
+
+						(set #catalog
+							(tackon "Catalogs"
+								(tackon #language "reqtoolsprefs.catalog")
+							)
+						)
+
+						(if (exists #catalog)
+							(copylib
+								(prompt (#copy #catalog #destination))
+								(source #catalog)
+								(dest   #destination)
+							)
+						)
+					)
+				)
+
+				(set #n (+ #n 1))
+			)
+		)
+	)
+)
+
+(complete 90)
+
+(if (BITAND #install-files #item-num-patch)
+	(
+		(copylib
+			(prompt	(#copy "RTPatch" #patch-dest))
+			(source	"RTPatch")
+			(dest	#patch-dest)
+		)
+
+		(if (= (exists (cat #patch-dest ".info")) 0)
+			(copyfiles
+				(prompt (#copy "RTPatch.info" #patch-dest))
+				(source "RTPatch.info")
+				(dest   #patch-dest)
+			)
+		)
+	)
+)
+
+(complete 100)
+
+(exit)

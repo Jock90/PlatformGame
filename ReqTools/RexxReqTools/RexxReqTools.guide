@@ -1,0 +1,3059 @@
+@database RexxReqTools
+@$VER: RexxReqTools.guide 37.21 (16.8.94)
+@(C) Rafael D'Halleweyn
+@author Rafael D'Halleweyn
+@index index
+
+@node main "RexxReqTools"
+@prev main
+@next main
+
+                            @{b}RexxReqTools 1.3@{ub}
+                           ===================
+
+         RexxReqTools is Copyright © 1992-1994 Rafael D'Halleweyn.
+                           All rights reserved.
+
+
+                          @{"     Disclaimer    " link disclaimer}
+                          @{"  Freeware Notice  " link freeware}
+
+                          @{"   Introduction    " link introduction}
+                          @{"   Requirements    " link requirements}
+                          @{"       Using       " link using}
+
+                          @{" List of Functions " link functions}
+                          @{"   List of Tags    " link taglist}
+                          @{" List of Constants " link constantlist}
+                          @{"  List of Errors   " link errorlist}
+
+                          @{"      History      " link history}
+
+                          @{"      Author       " link author}
+
+
+       somewhere to sleep somewhere to scrape your body off my feet
+      put on your black dress, float on your back too long, too lame
+                  now i'm gone white belly up in the sun
+                                              Tanya Donnely & Fred Abong
+
+
+  To  activate SHOW buttons make sure RexxReqTools is properly installed
+  then press this button @{"ACTIVATE SHOW BUTTONS" rxs "call addlib('rexxreqtools.library',0,-30);call rtezrequest('SHOW buttons are active')"}. @{"SHOW buttons don't work" link show_prob}
+@endnode
+
+
+@node disclaimer "RexxReqTools: Disclaimer"
+@prev disclaimer
+@next freeware
+
+  @{b}@{u}Disclaimer@{ub}@{uu}
+
+With  this  document  I  make  no  warranties  or  representations,  either
+expressed  or  implied,  with  respect to the program described herein. The
+program  and  the  information presented herein is being supplied on an `as
+is'  basis  and  is  expressly subject to change without notice. The entire
+risk  as to the use of the program and the information presented is assumed
+by the user. In no event will I be liable for direct, indirect, incidental,
+or consequential damages resulting from any claim arising out of the use of
+the  program  or  the  information  presented  herein,  even if I have been
+advised of the possibilities of such damages.
+@endnode
+
+
+@node freeware "RexxReqTools: Freeware Notice"
+@prev disclaimer
+@next introduction
+
+  @{b}@{u}ARCHandler is Freeware@{ub}@{uu}
+
+This  package is released as freeware. This means you can copy it freely as
+long  as  you  don't ask any money for it, except perhaps a nominal fee for
+copying.
+
+The  package  is  Copyright  © Rafael D'Halleweyn, All Rights Reserved. The
+author  reserves the right to change the status of this package whenever he
+finds it appropriate.
+
+This  package  should  not  be  spread  in  any  other form than an LhA (or
+equivalent)  archive  and  all  parts  of it should be spread together. The
+package  may  not  be  altered in any way and cannot be used for commercial
+purposes  without  the  prior written permission of the author. The archive
+should contain the following files:
+    RexxReqTools
+        Examples (dir)
+          Buffered.rexx
+          Buffered.rexx.info
+          FontReq.rexx
+          FontReq.rexx.info
+          Buffered.rexx
+          Buffered.rexx.info
+        Libs (dir)
+          @{"reqtools.library" link reqtools_library} (not included when spread in ReqTools archive)
+          @{"rexxreqtools.library" link rexxreqtools_library}
+      Demo.rexx
+      Demo.rexx.info
+      Examples.info
+      Install
+      Install.info
+      NoMoreDoc.doc
+      NoMoreDoc.doc.info
+      RexxReqTools.guide
+      RexxReqTools.guide.info
+  RexxReqTools.info
+@endnode
+
+
+@node introduction "RexxReqTools: Introduction"
+@prev freeware
+@next requirements
+
+  @{b}@{u}Introduction to RexxReqTools@{ub}@{uu}
+
+RexxReqTools   gives  @{"ARexx" link ARexx}  users  easy  access  to  a  large  family  of
+@{"requesters" link requester}.  All  requesters  are  easy  to  use;  they  require one or no
+arguments.  But  the  requesters  also  have a lot of power through several
+optional  arguments  and  through  @{"tagstrings" link tagstring}. RexxReqTools itself doesn't
+implement  any  of  these  requesters,  it  is  a  link  between  ARexx and
+@{"ReqTools" link ReqTools}.
+@endnode
+
+
+@node requirements "RexxReqTools: Requirements"
+@prev introduction
+@next using
+
+  @{b}@{u}Requirements@{ub}@{uu}
+
+RexxReqTools requires Kickstart 2.04 or higher and the following libraries:
+@{"rexxsyslib.library" link rexxsyslib_library},     @{"reqtools.library" link reqtools_library}    version    38    or    higher,
+`diskfont.library'.
+The   `rexxsyslib.library'   and   `diskfont.library'   should  already  be
+installed,   the   `reqtools.library'  is  installed  by  the  ReqTools  or
+RexxReqTools install script.
+@endnode
+
+
+@node using "RexxReqTools: Using"
+@prev requirements
+@next functions
+
+  @{b}@{u}Using RexxReqTools@{ub}@{uu}
+
+To   use   RexxReqTools   you   first   have   to   install   the   library
+@{"rexxreqtools.library" link rexxreqtools_library}  in  your  LIBS:  directory.  If you double click the
+`Install' icon, installation will proceed automatically.
+
+You also have to tell ARexx about this new library. You can do this through
+the CLI command
+
+                     RXLIB rexxreqtools.library 0 -30
+
+If   you  use  RexxReqTools  a  lot  you  can  insert  this  line  in  your
+user-startup.  Alternatively  you can insert the following command in every
+ARexx @{"script" link script} that uses RexxReqTools
+
+                   addlib('rexxreqtools.library',0,-30)
+
+
+If  you  use  a  lot  of  libraries  with ARexx you might want to give some
+libraries a higher priority, that way the functions in these libraries will
+execute faster.
+If you want to give RexxReqTools a higher priority, use:
+
+                     RXLIB rexxreqtools.library 5 -30
+or
+                   addlib('rexxreqtools.library',5,-30)        (in scripts)
+@endnode
+
+
+@node functions "RexxReqTools: List of Functions"
+@prev using
+@next taglist
+
+  @{b}@{u}List of Functions@{ub}@{uu}
+
+This  is  a  list  of  all  @{b}RexxReqTools functions@{ub}, RexxReqTools contains 8
+functions:
+
+  @{" rtezrequest()         " link rtezrequest}    message requester
+  @{" rtfilerequest()       " link rtfilerequest}    file requester
+  @{" rtfontrequest()       " link rtfontrequest}    font requester
+  @{" rtfreefilebuffer()    " link rtfreefilebuffer}
+  @{" rtgetlong()           " link rtgetlong}    number requester
+  @{" rtgetstring()         " link rtgetstring}    string requester
+  @{" rtpaletterequest()    " link rtpaletterequest}    color requester
+  @{" rtscreenmoderequest() " link rtscreenmoderequest}    screen mode requester
+  @{" rtscreenname()        " link rtscreenname}
+
+All  @{"requesters" link requester}  are implemented as functions. This means that you have to
+use them in an expression or use the CALL instruction.
+
+EXAMPLES:
+
+    filename = rtfilerequest()
+
+    CALL rtezrequest('Hello world')
+@endnode
+
+
+@node rtezrequest "RexxReqTools: rtezrequest()"
+@toc functions
+@prev rtezrequest
+
+  @{b}Message Requester: rtezrequest()@{ub}
+
+    @{i}ret @{ui}= @{b}rtezrequest@{ub} (@{i}bodytxt@{ui}, [@{i}gadtxt@{ui}], [@{i}title@{ui}], [@{i}tagstring@{ui}],
+                       [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    This  function  puts  up a @{"requester" link requester} for you and waits for a response
+    from the user.
+
+    You can satisfy the requester  with the following keyboard shortcuts:
+        "Y" or Left Amiga "V" for the positive response,
+        RETURN for the default response,
+        ESC, "N", "R" or Left Amiga "B" for the negative response.
+    (see: @{"rtez_defaultresponse" link rtez_defaultresponse}, @{"ezreqf_lamigaqual" link ezreqf_lamigaqual} and
+    @{"ezreqf_noreturnkey" link ezreqf_noreturnkey})
+
+  INPUTS
+    @{i}bodytxt @{ui}    the @{"bodytext" link bodytext} (required)
+    @{i}gadtxt @{ui}     the @{"gadgettext" link gadgettext} (optional, defaults to " OK ")
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this @{"resultname" link resultname}  variable will contain the same  value as
+                @{i}ret @{ui}(optional, defaults to "rtresult")
+
+  TAGS
+    @{" rt_font              " link rt_font}
+    @{" rt_idcmpflags        " link rt_idcmpflags}
+    @{" rt_leftoffset        " link rt_leftoffset}
+    @{" rt_lockwindow        " link rt_lockwindow}
+    @{" rt_pubscrname        " link rt_pubscrname}
+    @{" rt_reqpos            " link rt_reqpos}
+    @{" rt_screen            " link rt_screen}
+    @{" rt_screentofront     " link rt_screentofront}
+    @{" rt_topoffset         " link rt_topoffset}
+    @{" rt_waitpointer       " link rt_waitpointer}
+    @{" rt_window            " link rt_window}
+    @{" rtez_defaultresponse " link rtez_defaultresponse}
+    @{" rtez_flags           " link rtez_flags}
+
+  RESULT
+    @{i}ret @{ui}- 1  for  leftmost  (positive)  response,  then  each  consecutive
+          response  will return 1 more, the rightmost (false) response
+          will return 0 (false), so 1,2,3,...,num-1,0.
+          If  the  functions  returns  anything else the requester was
+          finished through an IDCMP message.
+
+  EXAMPLES
+    call rtezrequest('No block marked')
+        @{"SHOW" rxs "call rtezrequest('No block marked')"}
+
+    call rtezrequest('Do you really want to quit?','Quit|Cancel')
+        @{"SHOW" rxs "call rtezrequest('Do you really want to quit?','Quit|Cancel')"}
+
+    call rtezrequest('Stop?','_Yes|_Maybe| _No ',,,
+      'rtez_defaultresponse = 2')
+    /* makes "Maybe" the default response */
+        @{"SHOW" rxs "call rtezrequest('Stop?','_Yes|_Maybe| _No ',,'rtez_defaultresponse = 2')"}
+@endnode
+
+@node rtfilerequest "RexxReqTools: rtfilerequest()"
+@toc functions
+
+  @{b}File Requester: rtfilerequest()@{ub}
+
+    @{i}newfilename @{ui}= @{b}rtfilerequest@{ub} ([@{i}directory@{ui}], [@{i}filename@{ui}], [@{i}title@{ui}],
+                                 [@{i}oktext@{ui}], [@{i}tagstring@{ui}], [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    Get a directory and filename(s), or just a directory from the user.
+
+    If  you use multiselect (rtfi_flags freqf_multiselect) you can specify
+    a  @{i}resultname.@{ui}  The full paths and names of all selected files will be
+    placed  in  the  @{"compounds" link compound} of this variable and @{i}resultname.count @{ui}will
+    contain the number of selected files (or directories).
+
+
+    NOTE 1 The first filename is @{i}resultname.@{ui}1!!
+    NOTE 2 If  the  requester  was cancelled the  @{"compounds" link compound} will  have no
+    value!!
+
+    EXAMPLE
+        rtfilerequest(,,'Pick files',,,'rtfi_flags = freqf_multiselect',,
+          files)
+        say 'You selected' files.count 'files'
+        do i = 1 to files.count
+          say '  file' i || ':' files.i
+        end
+
+    If  rtfilerequest()  returns  a  directory  the  last character of the
+    string will be a colon ":" or a slash "/".  ("RAM:" and "DF1:foo/bar/"
+    are directories, while "RAM:t/tempfile" and "DF1:bar/foo" are files.)
+
+    The  file  requester  remembers  its  path  trough-out the life of the
+    calling  process.   It  even  allows you to buffer the contents of the
+    current directory for the next time rtfilerequest() is called from the
+    same process.
+    This  allows  you  to  use a buffered file requester from one program.
+    Everytime  you  start an @{"ARexx" link ARexx} script, which uses the file requester,
+    from  this  program  the  file  requester  will remember its path (and
+    possibly the directory contents if you use the @{"rtfi_buffer" link rtfi_buffer} tag).
+    (Path  and  buffer  will  be  remembered  until @{"rtfreefilebuffer()" link rtfreefilebuffer} is
+    called.)
+
+  INPUTS
+    @{i}directory @{ui}  directory  that is  shown  when the  file requester  opens
+                (optional)
+    @{i}filename @{ui}   default  value  for the  filename,  not  including  path!!
+                (optional)
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}oktext @{ui}     the @{"oktext" link oktext} (optional)
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1 if  the  user
+                pressed  "Ok",  or 0 if  the user  pressed "Cancel".  When
+                multiselect is used (@{"freqf_multiselect"  link freqf_multiselect}) @{i}resultname.@{ui}count
+                will contain the number of files (or directories) selected
+                and @{i}resultname.@{ui}1  ... will contain the  file (or directory)
+                names (optional: defaults to "rtresult")
+
+  TAGS
+    @{" rt_font            " link rt_font}
+    @{" rt_idcmpflags      " link rt_idcmpflags}
+    @{" rt_leftoffset      " link rt_leftoffset}
+    @{" rt_lockwindow      " link rt_lockwindow}
+    @{" rt_pubscrname      " link rt_pubscrname}
+    @{" rt_reqpos          " link rt_reqpos}
+    @{" rt_screen          " link rt_screen}
+    @{" rt_screentofront   " link rt_screentofront}
+    @{" rt_topoffset       " link rt_topoffset}
+    @{" rt_waitpointer     " link rt_waitpointer}
+    @{" rt_window          " link rt_window}
+    @{" rtfi_buffer        " link rtfi_buffer}
+    @{" rtfi_flags         " link rtfi_flags}
+    @{" rtfi_height        " link rtfi_height}
+    @{" rtfi_initialpath   " link rtfi_initialpath}
+    @{" rtfi_matchpat      " link rtfi_matchpat}
+    @{" rtfi_volumerequest " link rtfi_volumerequest}
+
+  RESULT
+    @{i}newfilename @{ui}- The  new filename that  was selected or  an empty string
+                  ("") if the requester was cancelled.
+
+  EXAMPLES
+    call open(file,rtfilerequest(,,'Pick file to open','_Open'))
+        @{"SHOW" rxs "call rtfilerequest(,,'Pick file to open','_Open')"}
+
+    volume = rtfilerequest(,,'Pick volume',,'rtfi_volumerequest = 0')
+        @{"SHOW" rxs "call rtfilerequest(,,'Pick volume',,'rtfi_volumerequest=0')"}
+
+    See also Examples/MultiSelect.rexx and Examples/Buffered.rexx
+@endnode
+
+@node rtfontrequest "RexxReqTools: rtfontrequest()"
+@toc functions
+
+  @{b}Font Requester: rtfontrequest()@{ub}
+
+    @{i}fontname @{ui}= @{b}rtfontrequest@{ub} ([@{i}title@{ui}], [@{i}oktext@{ui}], [@{i}tagstring@{ui}],
+                              [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    Let the user select a font and a style (optional).
+
+    All  attributes  of  the  selected  font  will be put in @{"compounds" link compound} of
+    @{i}resultname@{ui}:
+      @{i}resultname.@{ui}name       fontname
+      @{i}resultname.@{ui}height     fontsize
+      @{i}resultname.@{ui}bold       was bold selected (0 or 1)
+      @{i}resultname.@{ui}italic     was italic selected (0 or 1)
+      @{i}resultname.@{ui}underline  was underlined selected (0 or 1)
+
+    NOTE If the requester was cancelled the @{"compounds" link compound} will have no value!
+
+  INPUTS
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}oktext @{ui}     the @{"oktext" link oktext} (optional)
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1  if the  user
+                pressed "Ok",  or 0 if the user  pressed "Cancel".  When a
+                font was selected this variable will contain the @{"compounds" link compound}
+                describing  the  selected   font  (optional,  defaults  to
+                "rtresult")
+
+  TAGS
+    @{" rt_font           " link rt_font}
+    @{" rt_idcmpflags     " link rt_idcmpflags}
+    @{" rt_leftoffset     " link rt_leftoffset}
+    @{" rt_lockwindow     " link rt_lockwindow}
+    @{" rt_pubscrname     " link rt_pubscrname}
+    @{" rt_reqpos         " link rt_reqpos}
+    @{" rt_screen         " link rt_screen}
+    @{" rt_screentofront  " link rt_screentofront}
+    @{" rt_topoffset      " link rt_topoffset}
+    @{" rt_waitpointer    " link rt_waitpointer}
+    @{" rt_window         " link rt_window}
+    @{" rtfo_flags        " link rtfo_flags}
+    @{" rtfo_fontheight   " link rtfo_fontheight}
+    @{" rtfo_fontname     " link rtfo_fontname}
+    @{" rtfo_fontstyle    " link rtfo_fontstyle}
+    @{" rtfo_height       " link rtfo_height}
+    @{" rtfo_maxheight    " link rtfo_maxheight}
+    @{" rtfo_minheight    " link rtfo_minheight}
+    @{" rtfo_sampleheight " link rtfo_sampleheight}
+
+  RESULT
+    @{i}fontname @{ui}- name of the font
+
+  EXAMPLES
+    call rtfontrequest('Pick font',,'rtfo_flags = freqf_style',font)
+    if font then
+      do
+        text = 'You picked' font.name 'size' font.height
+        if font.bold then
+          text = text || '0A'x || 'You selected bold'
+        if font.italic then
+          text = text || '0A'x || 'You selected italic'
+        if font.underlined then
+          text = text || '0A'x || 'You selected underlined'
+        call rtezrequest(text,'Right')
+      end
+    else
+      call rtezrequest('You picked no font',"I'm sorry")
+
+        @{"SHOW" rx Examples/FontReq.rexx}
+@endnode
+
+@node rtfreefilebuffer "RexxReqTools: rtfreefilebuffer()"
+@toc functions
+
+  @{b}File Requester: rtfreefilebuffer() @{ub}
+
+    call @{b}rtfreefilebuffer@{ub} ()
+
+  DESCRIPTION
+    Frees  the  buffer  containing  all  the files that are in the current
+    directory  (ie.   ReqTools  will  have  to  reread the contents of the
+    directory).
+    As a side effect the file requester will also forget the current path.
+
+    NOTE:   Since  rtfreefilelist()  doesn't  return  anything, you should
+    always use the ARexx CALL command.
+
+  INPUTS
+    none
+
+  TAGS
+    none
+
+  RESULT
+    none
+
+  EXAMPLES
+    filename=rtfilerequest(,,'Pick file to open','_Open')
+    call rtfreefilelist()
+@endnode
+
+@node rtgetlong "RexxReqTools: rtgetlong()"
+@toc functions
+
+  @{b}Number Requester: rtgetlong()@{ub}
+
+    @{i}newnumber @{ui}= @{b}rtgetlong@{ub} ([@{i}number@{ui}], [@{i}bodytxt@{ui}], [@{i}title@{ui}], [@{i}gadtxt@{ui}],
+                           [@{i}tagstring@{ui}], [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    Puts up a @{"requester" link requester} to get a signed number from the user.
+
+    If @{i}number @{ui}is specified the requester will already contain a number.
+
+  INPUTS
+    @{i}number @{ui}     default value (optional)
+    @{i}bodytxt @{ui}    the @{"bodytext" link bodytext} (optional)
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}gadtxt @{ui}     the @{"gadgettext" link gadgettext} (optional, defaults to " _Ok |_Cancel")
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1  if the  user
+                pressed  "Ok",  or 0  if the  user  pressed  "Cancel".  If
+                @{"rt_idcmpflags" link rt_idcmpflags} or  @{i}gadtxt @{ui} are  used  this  variable  will
+                contain  the same  value  as @{"rtezrequest()" link rtezrequest}  would  return
+                (optional: defaults to "rtresult")
+
+  TAGS
+    @{" rt_font          " link rt_font}
+    @{" rt_idcmpflags    " link rt_idcmpflags}
+    @{" rt_leftoffset    " link rt_leftoffset}
+    @{" rt_lockwindow    " link rt_lockwindow}
+    @{" rt_pubscrname    " link rt_pubscrname}
+    @{" rt_reqpos        " link rt_reqpos}
+    @{" rt_screen        " link rt_screen}
+    @{" rt_screentofront " link rt_screentofront}
+    @{" rt_topoffset     " link rt_topoffset}
+    @{" rt_waitpointer   " link rt_waitpointer}
+    @{" rt_window        " link rt_window}
+    @{" rtgl_backfill    " link rtgl_backfill}
+    @{" rtgl_flags       " link rtgl_flags}
+    @{" rtgl_invisible   " link rtgl_invisible}
+    @{" rtgl_max         " link rtgl_max}
+    @{" rtgl_min         " link rtgl_min}
+    @{" rtgl_width       " link rtgl_width}
+
+  RESULT
+    @{i}newnumber @{ui}- the  number that was  entered or empty string  ("") if the
+                requester was cancelled.
+
+  EXAMPLES
+    age = rtgetlong(,'Enter your age',,,'rtgl_min = 0 rtgl_max = 120')
+        @{"SHOW" rxs "age = rtgetlong(,'Enter your age',,,'rtgl_min = 0 rtgl_max = 120')"}
+@endnode
+
+
+@node rtgetstring "RexxReqTools: rtgetstring()"
+@toc functions
+
+  @{b}Text Requester: rtgetstring()@{ub}
+
+    @{i}newstring @{ui}= @{b}rtgetstring@{ub} ([@{i}string@{ui}], [@{i}bodytxt@{ui}], [@{i}title@{ui}], [@{i}gadtxt@{ui}],
+                             [@{i}tagstring@{ui}], [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    Puts up a string @{"requester" link requester} to get a line of text from the user.
+    The  text  present in @{i}string @{ui}upon entry will be displayed, ready to be
+    edited.
+
+    If @{i}string @{ui}is specified the requester will already contain a string.
+
+  INPUTS
+    @{i}string @{ui}     text in  requester on  startup, everything after the 255th
+                character is ignored (optional)
+    @{i}bodytxt @{ui}    the @{"bodytext" link bodytext} (optional)
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}gadtxt @{ui}     the @{"gadgettext" link gadgettext} (optional, defaults to " _Ok |_Cancel")
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} to set further attributes (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1  if the  user
+                pressed  "Ok",  or 0  if the  user  pressed  "Cancel".  If
+                @{"rt_idcmpflags" link rt_idcmpflags}  or @{i}gadtxt @{ui} are  used  this  variable  will
+                contain  the same  value  as @{"rtezrequest()" link rtezrequest}  would  return
+                (optional: defaults to "rtresult")
+
+  TAGS
+    @{" rt_font          " link rt_font}
+    @{" rt_idcmpflags    " link rt_idcmpflags}
+    @{" rt_leftoffset    " link rt_leftoffset}
+    @{" rt_lockwindow    " link rt_lockwindow}
+    @{" rt_pubscrname    " link rt_pubscrname}
+    @{" rt_reqpos        " link rt_reqpos}
+    @{" rt_screen        " link rt_screen}
+    @{" rt_screentofront " link rt_screentofront}
+    @{" rt_topoffset     " link rt_topoffset}
+    @{" rt_waitpointer   " link rt_waitpointer}
+    @{" rt_window        " link rt_window}
+    @{" rtgs_backfill    " link rtgs_backfill}
+    @{" rtgs_flags       " link rtgs_flags}
+    @{" rtgs_invisible   " link rtgs_invisible}
+    @{" rtgs_width       " link rtgs_width}
+
+  RESULT
+    newstring - the  string that  was entered or empty  string ("") if the
+                requester was cancelled.
+
+    NOTE  You  can  see  the  difference  between an empty string that was
+    returned  and   a  requester  that  was  cancelled  by  examining  the
+    @{i}resultname @{ui}variable.
+
+  EXAMPLES
+    name = rtgetstring(,'Enter your name')
+        @{"SHOW" rxs "call rtgetstring(,'Enter your name')"}
+
+    password = rtgetstring(,'Enter your password',,,,
+      'rtgs_invisible = true')
+        @{"SHOW" rxs "call rtgetstring(,'Enter your password',,,'rtgs_invisible=true')"}
+@endnode
+
+@node rtpaletterequest "RexxReqTools: rtpaletterequest()"
+@toc functions
+
+  @{b}Color Requester: rtpaletterequest()@{ub}
+
+    @{i}newcolor @{ui}= @{b}rtpaletterequest@{ub} ([@{i}color@{ui}], [@{i}title@{ui}], [@{i}tagstring@{ui}],
+                                 [@{i}resultname@{ui}])
+
+  DESCRIPTION
+    Put  up  a  palette  @{"requester" link requester}  so  the  user can change the screen's
+    colors.
+
+    The selected color is returned,  so you can also use this requester to
+    let the user select a color.
+
+  INPUTS
+    @{i}color @{ui}      default color (optional, defaults to 1)
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1  if the  user
+                pressed "Ok", or 0 if the user pressed "Cancel" (optional:
+                defaults to "rtresult")
+
+  TAGS
+    @{" rt_font          " link rt_font}
+    @{" rt_idcmpflags    " link rt_idcmpflags}
+    @{" rt_leftoffset    " link rt_leftoffset}
+    @{" rt_lockwindow    " link rt_lockwindow}
+    @{" rt_pubscrname    " link rt_pubscrname}
+    @{" rt_reqpos        " link rt_reqpos}
+    @{" rt_screen        " link rt_screen}
+    @{" rt_screentofront " link rt_screentofront}
+    @{" rt_topoffset     " link rt_topoffset}
+    @{" rt_waitpointer   " link rt_waitpointer}
+    @{" rt_window        " link rt_window}
+
+  RESULT
+    newcolor - the color number  of the selected color  or an empty string
+               ("") if the request was cancelled.
+
+  EXAMPLES
+    color = rtpaletterequest(,'Pick color')
+        @{"SHOW" rxs "call rtpaletterequest(,'Pick color')"}
+@endnode
+
+@node rtscreenmoderequest "RexxReqTools: rtscreenmoderequest()"
+@toc functions
+
+  @{b}Screen Mode Requester: rtscreenmoderequest()@{ub}
+
+    @{i}screenmode @{ui}= @{b}rtscreenmoderequest@{ub} ([@{i}title@{ui}], [@{i}oktext@{ui}], [@{i}tagstring@{ui}],
+                                      [@{i}resultname@{ui}] )
+
+  DESCRIPTION
+    Get a screen mode from the user.
+
+    The  user  will  be able to pick a screen mode by name, enter the size
+    and the number of colors (bitplane depth).
+
+    All  attributes  of  the  selected  mode  are  stored  in compounds of
+    @{i}resultname@{ui}:
+      @{i}resultname.@{ui}name        name of display mode;
+      @{i}resultname.@{ui}width       selected width;
+      @{i}resultname.@{ui}height      selected height;
+      @{i}resultname.@{ui}depth       selected depth;
+      @{i}resultname.@{ui}overscan    overscan type:
+                                  0 - regular size,
+                                  1 - text size,
+                                  2 - graphics size,
+                                  3 - maximum size;
+      @{i}resultname.@{ui}autoscroll  1 if autoscroll was selected, else 0.
+
+  INPUTS
+    @{i}title @{ui}      title of the requester (optional)
+    @{i}oktext @{ui}     the @{"oktext" link oktext} (optional)
+    @{i}tagstring @{ui}  a @{"tagstring" link tagstring} (optional)
+    @{i}resultname @{ui} this  @{"resultname" link resultname}  variable  will  contain 1  if the  user
+                pressed "Ok",  or 0 if the user  pressed "Cancel".  When a
+                screenmode  was selected  this  variable will  contain the
+                @{"compounds" link compound}   describing  the   selected  font   (optional,
+                defaults to "rtresult")
+
+  TAGS
+    @{" rt_font          " link rt_font}
+    @{" rt_idcmpflags    " link rt_idcmpflags}
+    @{" rt_leftoffset    " link rt_leftoffset}
+    @{" rt_lockwindow    " link rt_lockwindow}
+    @{" rt_pubscrname    " link rt_pubscrname}
+    @{" rt_reqpos        " link rt_reqpos}
+    @{" rt_screen        " link rt_screen}
+    @{" rt_screentofront " link rt_screentofront}
+    @{" rt_topoffset     " link rt_topoffset}
+    @{" rt_waitpointer   " link rt_waitpointer}
+    @{" rt_window        " link rt_window}
+    @{" rtsc_flags       " link rtsc_flags}
+    @{" rtsc_height      " link rtsc_height}
+    @{" rtsc_maxdepth    " link rtsc_maxdepth}
+    @{" rtsc_maxheight   " link rtsc_maxheight}
+    @{" rtsc_maxwidth    " link rtsc_maxwidth}
+    @{" rtsc_mindepth    " link rtsc_mindepth}
+    @{" rtsc_minheight   " link rtsc_minheight}
+    @{" rtsc_minwidth    " link rtsc_minwidth}
+
+  RESULT
+    @{i}screenmode @{ui}- Empty  string  if  the  requester  was  canceled  or  the
+                 `DisplayID' if the user selected a screen mode.
+
+  EXAMPLES
+    displayid = rtscreenmoderequest( "Choose screen type", ,,
+      'rtsc_flags = screqf_autoscrollgad|screqf_sizegads|screqf_depthgad',,
+      screen)
+                        @{"SHOW" rxs "call rtscreenmoderequest('Choose screen type',,'rtsc_flags=screqf_autoscrollgad|screqf_sizegads|screqf_depthgad')"}
+@endnode
+
+@node rtscreenname "RexxReqTools: rtscreenname()"
+@next rtscreenname
+@toc functions
+
+  @{b}rtscreenname()@{ub}
+
+    publicscreenname = @{b}rtscreenname@{ub} ([@{i}resultname@{ui}] )
+
+  DESCRIPTION
+    Tries  to  find  the name of the public screen the process uses to put
+    its  requesters  on.  When  this  screen  can not be found and/or this
+    screen isn't a public screen the function returns an empty string.
+
+  INPUTS
+    @{i}resultname  @{ui}this  @{"resultname" link resultname}  variable will contain 1 if RexxReqTools
+                could find the name, otherwise 0.  (optional,  defaults to
+                "rtresult")
+
+  TAGS
+    none
+
+  RESULT
+    publicscreenname - Name of public screen or an empty string.
+
+  EXAMPLES
+    screenname=rtscreenname()
+@endnode
+
+@node bodytext "RexxReqTools: BodyText"
+@prev bodytext
+
+@{b}Bodytext@{ub}  is  the  main  text  that is displayed in the @{"requester" link requester}. You can
+split this text on several lines by using a newline ('0A'x).
+If  you  want  to  use a "%"-character in bodytext then you'll have to type
+"%%".  Also  don't  use  "%s", "%d", or any other C printf-style formatting
+codes  (The  computer  won't crash if you do use them, but output will look
+bad).
+
+EXAMPLES
+    'this is a bodytext'  @{"SHOW" rxs "call rtezrequest('this is a bodytext')"}
+
+    'some text split' || '0A'x || 'over two lines'  @{"SHOW" rxs "call rtezrequest('some text split' || '0A'x || 'over two lines')"}
+
+    'more text, split over' || NL ||,
+    'more lines, but easier' || NL ||,   @{"SHOW" rxs "call rtezrequest('more text, split over' || '0A'x || 'more lines, but easier' || '0A'x || 'to read in the script')"}
+    'to read in the script'
+
+NOTES
+    ·For the  third  example to work  you'll  have to  add the  assignment
+     "NL= '0A'x"  to  the  script.
+    ·The  comma in the  third  example is a  continuation  character for a
+     statement that continues on the next line.
+
+@{"rtezrequest()" link rtezrequest},  @{"rtgetlong()" link rtgetlong}  and  @{"rtgetstring()" link rtgetstring}  take such an argument.
+@endnode
+
+@node gadgettext "RexxReqTools: GadgetText"
+
+@{b}Gadgettext@{ub} describes the gadgets in the @{"requester" link requester}. It contains the text of
+all  the  gadgets.  Each  gadget  is  separated  from  the  others by a bar
+character  ("|").  They  will  appear in the same order as they were typed.
+There  is  no  limit  to  the number of gadgets other than the width of the
+screen the requester will appear on.
+You  can  also  specify a shortcut for each gadget by placing an underscore
+("_") before the character that identifies the shortcut key.
+If  you  want to use a "%"-character in gadgettext then you'll have to type
+"%%".  Also  don't  use  "%s", "%d", or any other C printf-style formatting
+codes  (The  computer  won't crash if you do use them, but output will look
+bad).
+
+EXAMPLES
+    'Continue'  @{"SHOW" rxs "call rtezrequest('Gadgettext demo','Continue')"}
+
+    ' _Ok |_Abort|_Cancel'  @{"SHOW" rxs "call rtezrequest('Gadgettext demo',' _Ok |_Abort|_Cancel')"}
+
+    '0%%|25%%|50%%|75%%|100%%'  @{"SHOW" rxs "call rtezrequest('Gadgettext demo','0%%|25%%|50%%|75%%|100%%')"}
+
+@{"rtezrequest()" link rtezrequest}, @{"rtgetlong()" link rtgetlong} and @{"rtgetstring()" link rtgetstring} take such an argument.
+@endnode
+
+
+@node oktext "RexxReqTools: OkText"
+
+A   special   case  of  @{"gadgettext" link gadgettext}  is  the  @{b}oktext@{ub}  (@{"rtfilerequest()" link rtfilerequest}  and
+@{"rtfontrequest()" link rtfontrequest}).  It is the replacement text for the "Ok" gadget. In this
+text  you  can  also  use  an  underscore  to  indicate a shortcut, but you
+shouldn't use a bar.
+
+EXAMPLES
+    '_Open'  @{"SHOW" rxs "call rtfilerequest(,,,'_Open')"}
+
+    'Delete'  @{"SHOW" rxs "call rtfilerequest(,,,'Delete')"}
+@endnode
+
+
+@node tagstring "RexxReqTools: TagStrings"
+@next resultname
+
+@{b}TagStrings@{ub}  make  it easy to specify further attributes to the functions. A
+tagstring  is a string made up of attribute/value pairs, called @{"tags" link tag} ,each
+pair  is  separated from the next by one or more spaces. (The use of spaces
+as separators makes it easy to link tagstrings together in @{"ARexx" link ARexx}).
+
+EXAMPLES
+    'rt_reqpos = reqpos_centerscr   rt_leftoffset = 120'
+
+    'rt_reqpos=reqpos_centerwin rt_leftoffset=75'
+
+NOTES
+    ·You shouldn't use the same @{"tag" link tag} twice in one tagstring.
+@endnode
+
+
+@node tag "RexxReqTools: Tags"
+@prev tag
+@next tag
+
+A @{b}tag@{ub} is an attribute/value pair, it contains the name of the attribute and
+the  value it will take, attribute and value are separated by an equal sign
+(of  course  you  can  use  extra  spaces between attribute, equal sign and
+value).  The  attribute can be in upper, lower or mixed case. You can chain
+several tags together to make a @{"tagstring" link tagstring}. The attribute value can be a:
+
+    ·@{i}a  number@{ui}:   a  number  should  only  contain  digits (0...9) but may
+     contain a minus sign as first character.
+
+    ·@{i}one  ore  more  constants@{ui}:  a constant is a name of which RexxReqTools
+     knows  the  value.  If you want to use two or more constants you have
+     to  separate them with a bar (`|') (don't use spaces).  The constants
+     can be in upper, lower or mixed case.
+
+    ·@{i}a  string@{ui}:   a  string may be surrounded by quotes, but if the string
+     contains spaces you should surround it.
+
+
+EXAMPLES
+    'rt_leftoffset=120'
+
+    "RTFI_FLAGS = FREQF_PATGAD|freqf_multiselect"
+
+    'rt_pubscrname = PowerPacker'
+
+NOTE
+    The last  example is equivalent  with  'rt_pubscrname = "PowerPacker"'
+    and 'rt_pubscrname = ''PowerPacker'''.
+
+SEE ALSO
+    ·@{"List of Tags" link taglist}
+    ·@{"List of Constants" link constantlist}
+@endnode
+
+@node resultname "RexxReqTools: ResultName"
+@prev tagstring
+@next resultname
+
+@{b}resultname@{ub}  is argument that specifies the @{"ARexx" link ARexx} variable where the return
+value  of  the @{"requester" link requester} will be stored. This argument is always optional,
+it defaults to "rtresult".
+Some  requesters that have to return a lot of information use @{"compounds" link compound} of
+this  variable  to  store information (@{"rtfilerequest()" link rtfilerequest} and @{"rtfontrequest()" link rtfontrequest}
+and @{"rtscreenmoderequest()" link rtscreenmoderequest}).
+
+For    example:    the    @{"font   requester" link rtfontrequest}   returns   in   the   @{"compound" link compound}
+@{i}resultname.@{ui}height the height of the selected font.
+@endnode
+
+
+@node taglist "RexxReqTools: List of Tags"
+@prev functions
+@next constantlist
+
+  @{b}@{u}List of Tags@{ub}@{uu}
+
+This  is  an  alphabetical  list of all @{"tags" link tag} per type (number, constant or
+string) that RexxReqTools understands:
+
+  @{b}number tags@{ub}:
+    @{"rt_leftoffset       " link rt_leftoffset}
+    @{"rt_screen           " link rt_screen}
+    @{"rt_topoffset        " link rt_topoffset}
+    @{"rtez_defaultresponse" link rtez_defaultresponse}
+    @{"rtfi_height         " link rtfi_height}
+    @{"rtfo_fontheight     " link rtfo_fontheight}
+    @{"rtfo_height         " link rtfo_height}
+    @{"rtfo_maxheight      " link rtfo_maxheight}
+    @{"rtfo_minheight      " link rtfo_minheight}
+    @{"rtfo_sampleheight   " link rtfo_sampleheight}
+    @{"rtgl_max            " link rtgl_max}
+    @{"rtgl_min            " link rtgl_min}
+    @{"rtgl_width          " link rtgl_width}
+    @{"rtgs_width          " link rtgs_width}
+    @{"rtsc_height         " link rtsc_height}
+    @{"rtsc_maxdepth       " link rtsc_maxdepth}
+    @{"rtsc_maxheight      " link rtsc_maxheight}
+    @{"rtsc_maxwidth       " link rtsc_maxwidth}
+    @{"rtsc_mindepth       " link rtsc_mindepth}
+    @{"rtsc_minheight      " link rtsc_minheight}
+    @{"rtsc_minwidth       " link rtsc_minwidth}
+
+  @{b}constant tags@{ub}:
+    @{"rt_idcmpflags     " link rt_idcmpflags}
+    @{"rt_lockwindow     " link rt_lockwindow}
+    @{"rt_reqpos         " link rt_reqpos}
+    @{"rt_screentofront  " link rt_screentofront}
+    @{"rt_waitpointer    " link rt_waitpointer}
+    @{"rt_window         " link rt_window}
+    @{"rtez_flags        " link rtez_flags}
+    @{"rtfi_buffer       " link rtfi_buffer}
+    @{"rtfi_flags        " link rtfi_flags}
+    @{"rtfi_volumerequest" link rtfi_volumerequest}
+    @{"rtfo_flags        " link rtfo_flags}
+    @{"rtfo_fontstyle    " link rtfo_fontstyle}
+    @{"rtgl_backfill     " link rtgl_backfill}
+    @{"rtgl_flags        " link rtgl_flags}
+    @{"rtgl_invisible    " link rtgl_invisible}
+    @{"rtgs_backfill     " link rtgs_backfill}
+    @{"rtgs_flags        " link rtgs_flags}
+    @{"rtgs_invisible    " link rtgs_invisible}
+    @{"rtsc_flags        " link rtsc_flags}
+
+  @{b}string tags@{ub}:
+    @{"rt_font         " link rt_font}
+    @{"rt_pubscrname   " link rt_pubscrname}
+    @{"rtfi_initialpath" link rtfi_initialpath}
+    @{"rtfi_matchpat   " link rtfi_matchpat}
+    @{"rtfo_fontname   " link rtfo_fontname}
+@endnode
+
+@node rt_font "RexxReqTools Tag: rt_font"
+@toc taglist
+@prev rt_font
+NAME
+    @{b}rt_font@{ub}
+
+VALUE
+    string
+
+DESCRIPTION
+    Name of the font that you want RexxReqTools to use for the @{"requester" link requester}.
+    Font  name  and height should be separated by a slash (`/'), font name
+    should include `.font'.
+    Note  that  this  font  should be fixed width for the @{"file requester" link rtfilerequest},
+    @{"font requester" link rtfontrequest}, @{"color requester" link rtpaletterequest} and the @{"screen mode requester" link rtscreenmoderequest}.
+
+EXAMPLE
+    `rt_font=diamond.font/20'
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_idcmpflags "RexxReqTools Tag: rt_idcmpflags"
+@toc taglist
+NAME
+    @{b}rt_idcmpflags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"idcmp_diskinserted  " link idcmp_diskinserted}
+      @{"idcmp_diskremoved   " link idcmp_diskremoved}
+      @{"idcmp_mousebuttons  " link idcmp_mousebuttons}
+      @{"idcmp_inactivewindow" link idcmp_inactivewindow}
+      @{"idcmp_rawkey        " link idcmp_rawkey}
+      @{"idcmp_vanillakey    " link idcmp_vanillakey}
+
+DESCRIPTION
+    Allows  you  to  specify other conditions on which the @{"requester" link requester} will
+    return.
+
+
+FUNCTIONS
+    @{"rtezrequest()" link rtezrequest}
+    @{"rtgetlong()  " link rtgetlong}
+    @{"rtgetstring()" link rtgetstring}
+@endnode
+
+@node rt_leftoffset "RexxReqTools Tag: rt_leftoffset"
+@toc taglist
+NAME
+    @{b}rt_leftoffset@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Offset  of left edge of @{"requester" link requester} relative to position specified with
+    @{"rt_reqpos" link rt_reqpos}   (does   not  offset  the  requester  when  @{"rt_reqpos" link rt_reqpos}  is
+    @{"reqpos_pointer" link reqpos_pointer}).
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_lockwindow "RexxReqTools Tag: rt_lockwindow"
+@toc taglist
+NAME
+    @{b}rt_lockwindow@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    If  this  is  @{"true" link true} the window calling the @{"requester" link requester} will get locked.
+    It  will no longer accept any user input and it will get standard wait
+    pointer set.
+
+DEFAULT
+    @{"false" link false}
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_pubscrname "RexxReqTools Tag: rt_pubscrname"
+@toc taglist
+NAME
+    @{b}rt_pubscrname@{ub}
+
+VALUE
+    string
+
+DESCRIPTION
+    Name  of  public screen @{"requester" link requester} should appear on.  When this tag is
+    used the @{"rt_window" link rt_window} tag will be ignored.
+    If  the  public  screen  is  not found the requester  will open on the
+    default public screen.
+    RexxReqTools will always try to open the requester  on the same screen
+    as  the  calling  program  (TECH  INFO:   but  this  may not always be
+    possible because some programs don't set their pr_WindowPtr).
+
+EXAMPLE
+    'rt_pubscrname=PowerPacker'
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_reqpos "RexxReqTools Tag: rt_reqpos"
+@toc taglist
+NAME
+    @{b}rt_reqpos@{ub}
+
+VALUE
+    One of the following:
+      @{"reqpos_centerscr " link reqpos_centerscr}
+      @{"reqpos_centerwin " link reqpos_centerwin}
+      @{"reqpos_pointer   " link reqpos_pointer}
+      @{"reqpos_topleftscr" link reqpos_topleftscr}
+      @{"reqpos_topleftwin" link reqpos_topleftwin}
+
+DESCRIPTION
+    This tag describes the @{"requesters" link requester} position.
+
+    The  requester  will always remain in the  visible part of the screen,
+    so  if  you  use  the  Screen  Mode preferences editor to enlarge your
+    Workbench  screen  and  you  scroll  around, the requester will always
+    appear in the part you can see.
+
+    @{"reqpos_centerscr" link reqpos_centerscr}  and  @{"reqpos_topleftscr" link reqpos_topleftscr}  also  apply to the visible
+    part of the screen.  So if you use one  of these the requester will be
+    appear  in  the  center  or  the  top left off what you can see of the
+    screen as opposed to the entire screen.
+
+    @{"reqpos_centerwin" link reqpos_centerwin} and @{"reqpos_topleftwin" link reqpos_topleftwin} fall back to @{"reqpos_centerscr" link reqpos_centerscr}
+    or  @{"reqpos_topleftscr" link reqpos_topleftscr} respectively when there is no parent window. So
+    you  can  safely  use  these without worrying about the existence of a
+    window.
+
+DEFAULT
+    @{"reqpos_pointer" link reqpos_pointer}
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_screen "RexxReqTools Tag: rt_screen"
+@toc taglist
+NAME
+    @{b}rt_screen@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Address  of  screen  to put @{"requester" link requester} on.  You should never use this,
+    use @{"rt_window" link rt_window} or @{"rt_pubscrname" link rt_pubscrname}.
+
+    RexxReqTools  contains  attributes  to  set  the  screen  on which the
+    requester  will appear (@{"rt_window" link rt_window}, rt_screen,  @{"rt_pubscrname" link rt_pubscrname}).  But
+    I  would  like to discourage you from using @{"rt_window" link rt_window} and @{"rt_screen" link rt_screen},
+    because incorrect use will crash the computer.
+
+    RexxReqTools  will always try to open the requester on the same screen
+    as  the  calling  program  (TECH  INFO:   but  this  may not always be
+    possible because some programs don't set their pr_WindowPtr).
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_screentofront "RexxReqTools Tag: rt_screentofront"
+@toc taglist
+NAME
+    @{b}rt_screentofront@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Boolean  indicating  whether  to  pop  the  screen the @{"requester" link requester} will
+    appear on to the front.
+
+DEFAULT
+    @{"true" link true}
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_topoffset "RexxReqTools Tag: rt_topoffset"
+@toc taglist
+NAME
+    @{b}rt_topoffset@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Offset  of  top edge of @{"requester" link requester} relative to position specified with
+    @{"rt_reqpos" link rt_reqpos}   (does   not  offset  the  requester  when  @{"rt_reqpos" link rt_reqpos}  is
+    @{"reqpos_pointer" link reqpos_pointer}).
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_waitpointer "RexxReqTools Tag: rt_waitpointer"
+@toc taglist
+NAME
+    @{b}rt_waitpointer@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    If this is @{"true" link true} the window calling the @{"requester" link requester} will get a standard
+    wait pointer set while the requester is up.
+
+DEFAULT
+    @{"false" link false}
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rt_window "RexxReqTools Tag: rt_window"
+@toc taglist
+@next rt_window
+NAME
+    @{b}rt_window@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Window that will be used to find the screen to put the @{"requester" link requester} on.
+
+    RexxReqTools  contains  attributes  to  set  the  screen  on which the
+    requester  will appear (rt_window, @{"rt_screen" link rt_screen}, @{"rt_pubscrname" link rt_pubscrname}).  But I
+    would  like  to  discourage  you  from using rt_window and @{"rt_screen" link rt_screen},
+    because incorrect use will crash the computer.
+    RexxReqTools  will always try to open the requester on the same screen
+    as  the  calling  program  (TECH  INFO:   but  this  may not always be
+    possible because some programs don't set their pr_WindowPtr).
+
+FUNCTIONS
+    @{"rtezrequest()        " link rtezrequest}
+    @{"rtfilerequest()      " link rtfilerequest}
+    @{"rtfontrequest()      " link rtfontrequest}
+    @{"rtgetlong()          " link rtgetlong}
+    @{"rtgetstring()        " link rtgetstring}
+    @{"rtpaletterequest()   " link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rtez_defaultresponse "RexxReqTools Tag: rtez_defaultresponse"
+@toc rtezrequest
+@prev rtez_defaultresponse
+NAME
+    @{b}rtez_defaultresponse@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Response  value that will be returned when the user presses the return
+    key.   Will  be  ignored  if the @{"ezreqf_noreturnkey" link ezreqf_noreturnkey} flag is set.  The
+    text for this response will be printed in bold.
+
+DEFAULT
+    1  (ie. the leftmost gadget)
+
+FUNCTIONS
+    @{"rtezrequest()" link rtezrequest}
+@endnode
+
+@node rtez_flags "RexxReqTools Tag: rtez_flags"
+@toc rtezrequest
+@next rtez_flags
+NAME
+    @{b}rtez_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"ezreqf_centertext " link ezreqf_centertext}
+      @{"ezreqf_lamigaqual " link ezreqf_lamigaqual}
+      @{"ezreqf_noreturnkey" link ezreqf_noreturnkey}
+
+DESCRIPTION
+    Flags for @{"rtezrequest()" link rtezrequest}.
+
+FUNCTIONS
+    @{"rtezrequest()" link rtezrequest}
+@endnode
+
+@node rtfi_buffer "RexxReqTools Tag: rtfi_buffer"
+@toc rtfilerequest
+@prev rtfi_buffer
+NAME
+    @{b}rtfi_buffer@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Use  a  buffer  to  remember  directory  contents  for  the  next time
+    @{"rtfilerequest()" link rtfilerequest} is used.
+
+    This  tag acts like a switch:  after you have used "rtfi_buffer=@{"true" link true}"
+    buffering will be turned on until it is turned off again.
+
+DEFAULT
+    @{"false" link false}
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfi_flags "RexxReqTools Tag: rtfi_flags"
+@toc rtfilerequest
+NAME
+    @{b}rtfi_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"freqf_multiselect" link freqf_multiselect}
+      @{"freqf_nofiles    " link freqf_nofiles}
+      @{"freqf_patgad     " link freqf_patgad}
+      @{"freqf_save       " link freqf_save}
+      @{"freqf_selectdirs " link freqf_selectdirs}
+
+DESCRIPTION
+    Flags for @{"rtfilerequest()" link rtfilerequest}.
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfi_height "RexxReqTools Tag: rtfi_height"
+@toc rtfilerequest
+NAME
+    @{b}rtfi_height@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Suggested height of @{"file requester" link rtfilerequest} window.
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfi_initialpath "RexxReqTools Tag: rtfi_initialpath"
+@toc rtfilerequest
+NAME
+    @{b}rtfi_initialpath@{ub}
+
+VALUE
+    string
+
+DESCRIPTION
+    This  is  the  path  of the file requester, the first time it is used.
+    Don't use the @{i}directory @{ui}argument if you use this tag.
+
+    The  second time the file requester is used, it will use the same path
+    as  the  path  that  was  in  use when the  file requester was OK'd or
+    cancelled the first time.
+
+    If  you  use the @{i}directory @{ui}argument the path will always be this path,
+    even if you changed it the last time you used the file requester.
+
+EXAMPLE
+    'rtfi_initialpath=REXX:'
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfi_matchpat "RexxReqTools Tag: rtfi_matchpat"
+@toc rtfilerequest
+NAME
+    @{b}rtfi_matchpat@{ub}
+
+VALUE
+    string
+
+DESCRIPTION
+    Pattern string to match files on.
+
+EXAMPLE
+    'rtfi_matchpat=#?.doc'
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfi_volumerequest "RexxReqTools Tag: rtfi_volumerequest"
+@toc rtfilerequest
+@next rtfi_volumerequest
+NAME
+    @{b}rtfi_volumerequest@{ub}
+
+VALUE
+    One or more of the following:
+      @{"vreqf_alldisks " link vreqf_alldisks}
+      @{"vreqf_noassigns" link vreqf_noassigns}
+      @{"vreqf_nodisks  " link vreqf_nodisks}
+
+DESCRIPTION
+    The   presence   of   this  tag  turns  the  @{"file  requester" link rtfilerequest}  into  a
+    volume/assign  disk  @{"requester" link requester}.   This requester can be used to get a
+    device name ("DF0:", "DH1:",..) or an assign ("C:", "FONTS:",...) from
+    the user.
+    Note that the user may edit the disk/assign names, or enter a new one.
+    Note  also  that the real device name is returned, not the name of the
+    volume in the device.  For example "DH1:", not "Hard1:".
+
+    NOTE: Do *NOT* use "rtfi_volumerequest 1"!
+    You    are    then    setting    the    vreqf_noassigns   flag!    Use
+    "rtfi_volumerequest 0" for a normal volume requester.
+
+FUNCTIONS
+    @{"rtfilerequest()" link rtfilerequest}
+@endnode
+
+@node rtfo_flags "RexxReqTools Tag: rtfo_flags"
+@toc rtfontrequest
+@prev rtfo_flags
+NAME
+    @{b}rtfo_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"freqf_changepalette" link freqf_changepalette}
+      @{"freqf_colorfonts   " link freqf_colorfonts}
+      @{"freqf_fixedwidth   " link freqf_fixedwidth}
+      @{"freqf_leavepalette " link freqf_leavepalette}
+      @{"freqf_scale        " link freqf_scale}
+      @{"freqf_style        " link freqf_style}
+
+DESCRIPTION
+    Flags for @{"rtfontrequest()" link rtfontrequest}
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_fontheight "RexxReqTools Tag: rtfo_fontheight"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_fontheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Set the default fontsize.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_fontname "RexxReqTools Tag: rtfo_fontname"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_fontname@{ub}
+
+VALUE
+    string
+
+DESCRIPTION
+    Set the name of the default font.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+
+EXAMPLE
+    rtfontname=diamond.font
+@endnode
+
+@node rtfo_height "RexxReqTools Tag: rtfo_height"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_height@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Suggested height of @{"font requester" link rtfontrequest} window.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_maxheight "RexxReqTools Tag: rtfo_maxheight"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_maxheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Maximum font size displayed.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_minheight "RexxReqTools Tag: rtfo_minheight"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_minheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Minimum font size displayed.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_fontstyle "RexxReqTools Tag: rtfo_fontstyle"
+@toc rtfontrequest
+NAME
+    @{b}rtfo_fontstyle@{ub}
+
+VALUE
+    One or more of the following:
+      @{"bold      " link bold}
+      @{"italic    " link italic}
+      @{"underlined" link underlined}
+
+DESCRIPTION
+    Selected the default style of the font.
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtfo_sampleheight "RexxReqTools Tag: rtfo_sampleheight"
+@toc rtfontrequest
+@next rtfo_sampleheight
+NAME
+    @{b}rtfo_sampleheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Height of font sample display in pixels.
+
+DEFAULT
+    24
+
+FUNCTIONS
+    @{"rtfontrequest()" link rtfontrequest}
+@endnode
+
+@node rtgl_backfill "RexxReqTools Tag: rtgl_backfill"
+@toc rtgetlong
+@prev rtgl_backfill
+NAME
+    @{b}rtgl_backfill@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Backfill @{"requester" link requester} window with pattern.
+
+DEFAULT
+    @{"true" link true}
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgl_flags "RexxReqTools Tag: rtgl_flags"
+@toc rtgetlong
+NAME
+    @{b}rtgl_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"glreqf_centertext   " link glreqf_centertext}
+      @{"glreqf_highlighttext" link glreqf_highlighttext}
+
+DESCRIPTION
+    Flags for @{"rtgetlong()" link rtgetlong}.
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgl_invisible "RexxReqTools Tag: rtgl_invisible"
+@toc rtgetlong
+NAME
+    @{b}rtgl_invisible@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Using this tag you can switch on invisible typing.  Very useful if you
+    need to get something like a code number from the user.
+
+DEFAULT
+    @{"false" link false}
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgl_max "RexxReqTools Tag: rtgl_max"
+@toc rtgetlong
+NAME
+    @{b}rtgl_max@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Maximum allowed value, higher values are refused.
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgl_min "RexxReqTools Tag: rtgl_min"
+@toc rtgetlong
+NAME
+    @{b}rtgl_min@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Minimum allowed value.  If the user tries to enter a smaller value the
+    @{"requester" link requester} will refuse to accept it.
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgl_width "RexxReqTools Tag: rtgl_width"
+@toc rtgetlong
+@next rtgl_width
+NAME
+    @{b}rtgl_width@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Width  of  @{"requester" link requester}  window  in  pixels.  This is only a suggestion.
+    @{"rtgetlong()" link rtgetlong} will not go below a certain width.
+
+FUNCTIONS
+    @{"rtgetlong()" link rtgetlong}
+@endnode
+
+@node rtgs_backfill "RexxReqTools Tag: rtgs_backfill"
+@toc rtgetstring
+@prev rtgs_backfill
+NAME
+    @{b}rtgs_backfill@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Backfill @{"requester" link requester} window with pattern.
+
+DEFAULT
+    @{"true" link true}
+
+FUNCTIONS
+    @{"rtgetstring()" link rtgetstring}
+@endnode
+
+@node rtgs_flags "RexxReqTools Tag: rtgs_flags"
+@toc rtgetstring
+NAME
+    @{b}rtgs_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"gsreqf_centertext   " link gsreqf_centertext}
+      @{"gsreqf_highlighttext" link gsreqf_highlighttext}
+
+DESCRIPTION
+    Flags for @{"rtgetstring()" link rtgetstring}.
+
+FUNCTIONS
+    @{"rtgetstring()" link rtgetstring}
+@endnode
+
+@node rtgs_invisible "RexxReqTools Tag: rtgs_invisible"
+@toc rtgetstring
+NAME
+    @{b}rtgs_invisible@{ub}
+
+VALUE
+    @{"true" link true} or @{"false" link false}
+
+DESCRIPTION
+    Using this tag you can switch on invisible typing.
+    Very  useful  if  you  need  to get something like a password from the
+    user.   It  is  strongly advised to use an empty initial string or the
+    user may get very confused!
+
+DEFAULT
+    @{"false" link false}
+
+FUNCTIONS
+    @{"rtgetstring()" link rtgetstring}
+@endnode
+
+@node rtgs_width "RexxReqTools Tag: rtgs_width"
+@toc rtgetstring
+@next rtgs_width
+NAME
+    @{b}rtgs_width@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Width  of  @{"requester" link requester}  window  in  pixels.  This is only a suggestion.
+    @{"rtgetstring()" link rtgetstring} will not go below a certain width.
+
+FUNCTIONS
+    @{"rtgetstring()" link rtgetstring}
+@endnode
+
+@node rtsc_flags "RexxReqTools Tag: rtsc_flags"
+@toc rtscreenmoderequest
+@prev rtsc_flags
+NAME
+    @{b}rtsc_flags@{ub}
+
+VALUE
+    One or more of the following:
+      @{"screqf_overscangad  " link screqf_overscangad}
+      @{"screqf_autoscrollgad" link screqf_autoscrollgad}
+      @{"screqf_sizegads     " link screqf_sizegads}
+      @{"screqf_depthgad     " link screqf_depthgad}
+      @{"screqf_nonstdmodes  " link screqf_nonstdmodes}
+      @{"screqf_guimodes     " link screqf_guimodes}
+
+DESCRIPTION
+    Flags for the @{"screen mode requester" link rtscreenmoderequest}.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+@node rtsc_height "RexxReqTools Tag: rtsc_height"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_height@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    Suggested height of the screen mode requester window.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_maxdepth "RexxReqTools Tag: rtsc_maxdepth"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_maxdepth@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The maximum display depth allowed.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_maxheight "RexxReqTools Tag: rtsc_maxheight"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_maxheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The maximum display height allowed.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_maxwidth "RexxReqTools Tag: rtsc_maxwidth"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_maxwidth@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The maximum display width allowed
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_mindepth "RexxReqTools Tag: rtsc_mindepth"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_mindepth@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The minimum display depth allowed.
+    Modes  with  a  minimum display depth lower than this value will no be
+    included in the list.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_minheight "RexxReqTools Tag: rtsc_minheight"
+@toc rtscreenmoderequest
+NAME
+    @{b}rtsc_minheight@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The minimum display height allowed.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node rtsc_minwidth "RexxReqTools Tag: rtsc_minwidth"
+@toc rtscreenmoderequest
+@next rtsc_minwidth
+NAME
+    @{b}rtsc_minwidth@{ub}
+
+VALUE
+    number
+
+DESCRIPTION
+    The minimum display width allowed.
+
+FUNCTIONS
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+@endnode
+
+
+@node constantlist "RexxReqTools: Constants"
+@prev taglist
+@next errorlist
+
+  @{b}@{u}List of Constants@{ub}@{uu}
+
+This  is  an  alphabetical list of all the @{"constants" link tag}, per originating tag,
+that RexxReqTools understands:
+
+    @{"false" link false}
+    @{"true " link true}
+
+  @{"rtez_flags" link rtez_flags}:
+    @{"ezreqf_centertext " link ezreqf_centertext}
+    @{"ezreqf_lamigaqual " link ezreqf_lamigaqual}
+    @{"ezreqf_noreturnkey" link ezreqf_noreturnkey}
+
+  @{"rtfi_flags" link rtfi_flags}:
+    @{"freqf_multiselect" link freqf_multiselect}
+    @{"freqf_nofiles    " link freqf_nofiles}
+    @{"freqf_patgad     " link freqf_patgad}
+    @{"freqf_save       " link freqf_save}
+    @{"freqf_selectdirs " link freqf_selectdirs}
+
+  @{"rtfo_flags" link rtfo_flags}:
+    @{"freqf_changepalette" link freqf_changepalette}
+    @{"freqf_colorfonts   " link freqf_colorfonts}
+    @{"freqf_fixedwidth   " link freqf_fixedwidth}
+    @{"freqf_leavepalette " link freqf_leavepalette}
+    @{"freqf_scale        " link freqf_scale}
+    @{"freqf_style        " link freqf_style}
+
+  @{"rtfo_fontstyle" link rtfo_fontstyle}:
+    @{"bold      " link bold}
+    @{"italic    " link italic}
+    @{"underlined" link underlined}
+
+  @{"rtgl_flags" link rtgl_flags}:
+    @{"glreqf_centertext   " link glreqf_centertext}
+    @{"glreqf_highlighttext" link glreqf_highlighttext}
+
+  @{"rtgs_flags" link rtgs_flags}:
+    @{"gsreqf_centertext   " link gsreqf_centertext}
+    @{"gsreqf_highlighttext" link gsreqf_highlighttext}
+
+  @{"rtsc_flags" link rtsc_flags}:
+    @{"screqf_autoscrollgad" link screqf_autoscrollgad}
+    @{"screqf_depthgad     " link screqf_depthgad}
+    @{"screqf_guimodes     " link screqf_guimodes}
+    @{"screqf_nonstdmodes  " link screqf_nonstdmodes}
+    @{"screqf_overscangad  " link screqf_overscangad}
+    @{"screqf_sizegads     " link screqf_sizegads}
+
+  @{"rtfi_volumerequest" link rtfi_volumerequest}:
+    @{"vreqf_alldisks " link vreqf_alldisks}
+    @{"vreqf_noassigns" link vreqf_noassigns}
+    @{"vreqf_nodisks  " link vreqf_nodisks}
+
+  @{"rt_idcmpflags" link rt_idcmpflags}:
+    @{"idcmp_diskinserted  " link idcmp_diskinserted}
+    @{"idcmp_diskremoved   " link idcmp_diskremoved}
+    @{"idcmp_inactivewindow" link idcmp_inactivewindow}
+    @{"idcmp_mousebuttons  " link idcmp_mousebuttons}
+    @{"idcmp_rawkey        " link idcmp_rawkey}
+    @{"idcmp_vanillakey    " link idcmp_vanillakey}
+
+  @{"rt_reqpos" link rt_reqpos}:
+    @{"reqpos_centerscr " link reqpos_centerscr}
+    @{"reqpos_centerwin " link reqpos_centerwin}
+    @{"reqpos_pointer   " link reqpos_pointer}
+    @{"reqpos_topleftscr" link reqpos_topleftscr}
+    @{"reqpos_topleftwin" link reqpos_topleftwin}
+@endnode
+
+
+@node false "RexxReqTools Constant: false"
+@toc constantlist
+@prev false
+NAME
+    @{b}false@{ub}
+
+DESCRIPTION
+    This constant will disable the attribute.
+
+TAG
+    @{"rt_lockwindow   " link rt_lockwindow}
+    @{"rt_screentofront" link rt_screentofront}
+    @{"rt_waitpointer  " link rt_waitpointer}
+    @{"rtfi_buffer     " link rtfi_buffer}
+    @{"rtgl_backfill   " link rtgl_backfill}
+    @{"rtgl_invisible  " link rtgl_invisible}
+    @{"rtgs_backfill   " link rtgs_backfill}
+    @{"rtgs_invisible  " link rtgs_invisible}
+@endnode
+
+@node true "RexxReqTools Constant: true"
+@toc constantlist
+@next true
+NAME
+    @{b}true@{ub}
+
+DESCRIPTION
+    This constant will enable the attribute.
+
+TAG
+    @{"rt_lockwindow   " link rt_lockwindow}
+    @{"rt_screentofront" link rt_screentofront}
+    @{"rt_waitpointer  " link rt_waitpointer}
+    @{"rtfi_buffer     " link rtfi_buffer}
+    @{"rtgl_backfill   " link rtgl_backfill}
+    @{"rtgl_invisible  " link rtgl_invisible}
+    @{"rtgs_backfill   " link rtgs_backfill}
+    @{"rtgs_invisible  " link rtgs_invisible}
+@endnode
+
+@node ezreqf_centertext "RexxReqTools Constant: ezreqf_centertext"
+@toc rtez_flags
+@prev ezreqf_centertext
+NAME
+    @{b}ezreqf_centertext@{ub}
+
+DESCRIPTION
+    Centers  each  line of body text in the @{"requester" link requester} window.  Useful for
+    about requesters.
+
+TAG
+    @{"rtez_flags" link rtez_flags}
+@endnode
+
+@node ezreqf_lamigaqual "RexxReqTools Constant: ezreqf_lamigaqual"
+@toc rtez_flags
+NAME
+    @{b}ezreqf_lamigaqual@{ub}
+
+DESCRIPTION
+    This  flag  should  be  used  when  you  put  up  a  @{"requester" link requester}  for a
+    destructive  action  (e.g.  to  delete something).  When it is set the
+    keyboard shortcuts are limited to Left Amiga "V" and "B" so it is hard
+    to accidentally select something you will regret.
+    Note that the RETURN and ESC key remain active!  To disable the RETURN
+    key use the @{"ezreqf_noreturnkey" link ezreqf_noreturnkey} flag.  The ESC key cannot be disabled.
+
+TAG
+    @{"rtez_flags" link rtez_flags}
+@endnode
+
+@node ezreqf_noreturnkey "RexxReqTools Constant: ezreqf_noreturnkey"
+@toc rtez_flags
+@next ezreqf_noreturnkey
+NAME
+    @{b}ezreqf_noreturnkey@{ub}
+
+DESCRIPTION
+    turn off the RETURN key as shortcut for positive response.
+    If  ezreqf_noreturnkey is _not_ set the RETURN key is also accepted as
+    a   shortcut   for   the  positive  response  (can  be  changed  using
+    @{"rtez_defaultresponse" link rtez_defaultresponse}).   The  response that will be selected when you
+    press RETURN will be printed in bold.
+
+TAG
+    @{"rtez_flags" link rtez_flags}
+@endnode
+
+@node freqf_multiselect "RexxReqTools Constant: freqf_multiselect"
+@toc rtfi_flags
+@prev freqf_multiselect
+NAME
+    @{b}freqf_multiselect@{ub}
+
+DESCRIPTION
+    Allows multiple files to be selected.
+
+TAG
+    @{"rtfi_flags" link rtfi_flags}
+@endnode
+
+@node freqf_nofiles "RexxReqTools Constant: freqf_nofiles"
+@toc constantlist
+NAME
+    @{b}freqf_nofiles@{ub}
+
+DESCRIPTION
+    Set this if you want to use the @{"requester" link requester} to allow the user to select
+    a  directory rather than a file.  Ideal for getting a destination dir.
+    May be used with @{"freqf_multiselect" link freqf_multiselect} and @{"freqf_selectdirs" link freqf_selectdirs}.
+
+TAG
+    @{"rtfi_flags" link rtfi_flags}
+@endnode
+
+@node freqf_patgad "RexxReqTools Constant: freqf_patgad"
+@toc rtfi_flags
+NAME
+    @{b}freqf_patgad@{ub}
+
+DESCRIPTION
+    When  this  is  set  a  pattern  gadget  will  be  added  to  the file
+    @{"requester" link requester}.
+
+TAG
+    @{"rtfi_flags" link rtfi_flags}
+@endnode
+
+@node freqf_save "RexxReqTools Constant: freqf_save"
+@toc rtfi_flags
+NAME
+    @{b}freqf_save@{ub}
+
+DESCRIPTION
+    Set  this  if  you  are  using  the  @{"file requester" link rtfilerequest} to save or delete
+    something.  Double-clicking will be disabled so it is harder to make a
+    mistake  and select the wrong file.  If the user enters a non-existent
+    directory  in the drawer string gadget, a requester will appear asking
+    if the directory should be created.
+
+TAG
+    @{"rtfi_flags" link rtfi_flags}
+@endnode
+
+@node freqf_selectdirs "RexxReqTools Constant: freqf_selectdirs"
+@toc rtfi_flags
+@next freqf_selectdirs
+NAME
+    @{b}freqf_selectdirs@{ub}
+
+DESCRIPTION
+    Set  this  flag if you wish to enable the selecting of dirs as well as
+    files.  You *must* also set @{"freqf_multiselect" link freqf_multiselect}.
+
+TAG
+    @{"rtfi_flags" link rtfi_flags}
+@endnode
+
+@node freqf_changepalette "RexxReqTools Constant: freqf_changepalette"
+@toc rtfo_flags
+@prev freqf_changepalette
+NAME
+    @{b}freqf_changepalette@{ub}
+
+DESCRIPTION
+    Change the screen's palette to match that of a selected color font.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node freqf_colorfonts "RexxReqTools Constant: freqf_colorfonts"
+@toc rtfo_flags
+NAME
+    @{b}freqf_colorfonts@{ub}
+
+DESCRIPTION
+    Show color fonts also.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node freqf_fixedwidth "RexxReqTools Constant: freqf_fixedwidth"
+@toc rtfo_flags
+NAME
+    @{b}freqf_fixedwidth@{ub}
+
+DESCRIPTION
+    Only show fixed-width fonts.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node freqf_leavepalette "RexxReqTools Constant: freqf_leavepalette"
+@toc rtfo_flags
+NAME
+    @{b}freqf_leavepalette@{ub}
+
+DESCRIPTION
+    Leave  the  palette as it is when exiting @{"rtfontrequest()" link rtfontrequest}.  Useful in
+    combination with @{"freqf_changepalette" link freqf_changepalette}.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node freqf_scale "RexxReqTools Constant: freqf_scale"
+@toc rtfo_flags
+NAME
+    @{b}freqf_scale@{ub}
+
+DESCRIPTION
+    Allows fonts to be scaled when they don't exist in the requested size.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node freqf_style "RexxReqTools Constant: freqf_style"
+@toc rtfo_flags
+@next freqf_style
+NAME
+    @{b}freqf_style@{ub}
+
+DESCRIPTION
+    Include gadgets so the user may select the font's style.
+
+TAG
+    @{"rtfo_flags" link rtfo_flags}
+@endnode
+
+@node bold "RexxReqtools Constant: bold"
+@toc rtfo_fontstyle
+@prev bold
+NAME
+  @{b}bold@{ub}
+
+DESCRIPTION
+  The default style of the font will be bold.
+
+TAG
+    @{"rtfo_fontstyle" link rtfo_fontstyle}
+@endnode
+
+@node italic "RexxReqtools Constant: italic"
+@toc rtfo_fontstyle
+NAME
+  @{b}italic@{ub}
+
+DESCRIPTION
+  The default style of the font will be italic.
+
+TAG
+    @{"rtfo_fontstyle" link rtfo_fontstyle}
+@endnode
+
+@node underlined "RexxReqtools Constant: underlined"
+@toc rtfo_fontstyle
+@next underlined
+NAME
+  @{b}underlined@{ub}
+
+DESCRIPTION
+  The default style of the font will be underlined.
+
+TAG
+    @{"rtfo_fontstyle" link rtfo_fontstyle}
+@endnode
+
+@node glreqf_centertext "RexxReqTools Constant: glreqf_centertext"
+@toc rtgl_flags
+@prev glreqf_centertext
+NAME
+    @{b}glreqf_centertext@{ub}
+
+DESCRIPTION
+    Centers  each  line of text above the gadget in the @{"requester" link requester} window.
+    Should be generally set.
+
+TAG
+    @{"rtgl_flags" link rtgl_flags}
+@endnode
+
+@node glreqf_highlighttext "RexxReqTools Constant: glreqf_highlighttext"
+@toc rtgl_flags
+@next glreqf_highlighttext
+NAME
+    @{b}glreqf_highlighttext@{ub}
+
+DESCRIPTION
+    Highlight  text  above the gadget.  You will normally only want to use
+    this if you also turned off the window backfilling.
+
+TAG
+    @{"rtgl_flags" link rtgl_flags}
+@endnode
+
+@node gsreqf_centertext "RexxReqTools Constant: gsreqf_centertext"
+@toc rtgs_flags
+@prev gsreqf_centertext
+NAME
+    @{b}gsreqf_centertext@{ub}
+
+DESCRIPTION
+    Centers  each  line of text above the gadget in the @{"requester" link requester} window.
+    Should be generally set.
+
+TAG
+    @{"rtgs_flags" link rtgs_flags}
+@endnode
+
+@node gsreqf_highlighttext "RexxReqTools Constant: gsreqf_highlighttext"
+@toc rtgs_flags
+@next gsreqf_highlighttext
+NAME
+    @{b}gsreqf_highlighttext@{ub}
+
+DESCRIPTION
+    Highlight  text  above the gadget.  You will normally only want to use
+    this if you also turned off the window backfilling.
+
+TAG
+    @{"rtgs_flags" link rtgs_flags}
+@endnode
+
+@node idcmp_diskinserted "RexxReqTools Constant: idcmp_diskinserted"
+@toc rt_idcmpflags
+@prev idcmp_diskinserted
+NAME
+    @{b}idcmp_diskinserted@{ub}
+
+DESCRIPTION
+    Requester disappears when a disk is inserted.
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node idcmp_diskremoved "RexxReqTools Constant: idcmp_diskremoved"
+@toc rt_idcmpflags
+NAME
+    @{b}idcmp_diskremoved@{ub}
+
+DESCRIPTION
+    Requester disappears when a disk is removed.
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node idcmp_inactivewindow "RexxReqTools Constant: idcmp_inactivewindow"
+@toc rt_idcmpflags
+NAME
+    @{b}idcmp_inactivewindow@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester} disappears when requester window is deactivated.
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node idcmp_mousebuttons "RexxReqTools Constant: idcmp_mousebuttons"
+@toc rt_idcmpflags
+NAME
+    @{b}idcmp_mousebuttons@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester}  disappears  when a mouse button is pressed (left and right
+    mouse button).
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node idcmp_rawkey "RexxReqTools Constant: idcmp_rawkey"
+@toc rt_idcmpflags
+NAME
+    @{b}idcmp_rawkey@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester}  disappears  when  any  key  is  pressed  (works  also with
+    "Shift", "Ctrl", ...).
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node idcmp_vanillakey "RexxReqTools Constant: idcmp_vanillakey"
+@toc rt_idcmpflags
+@next idcmp_vanillakey
+NAME
+    @{b}idcmp_vanillakey@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester}  disappears when a key is pressed (all keys except "Shift",
+    "Ctrl", ...).
+
+TAG
+    @{"rt_idcmpflags" link rt_idcmpflags}
+@endnode
+
+@node reqpos_centerscr "RexxReqTools Constant: reqpos_centerscr"
+@toc rt_reqpos
+@prev reqpos_centerscr
+NAME
+    @{b}reqpos_centerscr@{ub}
+
+DESCRIPTION
+    @{"Requester" link requester} is centered on the screen.
+
+TAG
+    @{"rt_reqpos" link rt_reqpos}
+@endnode
+
+@node reqpos_centerwin "RexxReqTools Constant: reqpos_centerwin"
+@toc rt_reqpos
+NAME
+    @{b}reqpos_centerwin@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester}  is  centered in the window specified by @{"rt_window" link rt_window}.  If no
+    @{"rt_window" link rt_window} is specified the requester will be centered on the screen.
+
+TAG
+    @{"rt_reqpos" link rt_reqpos}
+@endnode
+
+@node reqpos_pointer "RexxReqTools Constant: reqpos_pointer"
+@toc rt_reqpos
+NAME
+    @{b}reqpos_pointer@{ub}
+
+DESCRIPTION
+    @{"Requester" link requester} appears where the mouse pointer is (default).
+
+TAG
+    @{"rt_reqpos" link rt_reqpos}
+@endnode
+
+@node reqpos_topleftscr "RexxReqTools Constant: reqpos_topleftscr"
+@toc rt_reqpos
+NAME
+    @{b}reqpos_topleftscr@{ub}
+
+DESCRIPTION
+    @{"Requester" link requester} appears at the top left of the screen.
+
+TAG
+    @{"rt_reqpos" link rt_reqpos}
+@endnode
+
+@node reqpos_topleftwin "RexxReqTools Constant: reqpos_topleftwin"
+@toc rt_reqpos
+@next reqpos_topleftwin
+NAME
+    @{b}reqpos_topleftwin@{ub}
+
+DESCRIPTION
+    @{"Requester" link Requester}  appears  at  the  top  left  of  the  window  specified by
+    @{"rt_window" link rt_window}.
+
+TAG
+    @{"rt_reqpos" link rt_reqpos}
+@endnode
+
+@node screqf_autoscrollgad "RexxReqTools Constant: screqf_autoscrollgad"
+@toc rtsc_flags
+@prev screqf_autoscrollgad
+NAME
+    @{b}screqf_autoscrollgad@{ub}
+
+DESCRIPTION
+    Add an autoscroll checkbox gadget to the @{"screen mode requester" link rtscreenmoderequest}.
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node screqf_depthgad "RexxReqTools Constant: screqf_depthgad"
+@toc rtsc_flags
+NAME
+    @{b}screqf_depthgad@{ub}
+
+DESCRIPTION
+    Add  a  depth  slider  gadget  to  the  requester to  the @{"screen mode" link rtscreenmoderequest}
+    requester.   If you do not add a depth gadget, the depth returned will
+    be the maximum depth this mode can be opened in;
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node screqf_guimodes "RexxReqTools Constant: screqf_guimodes"
+@toc rtsc_flags
+NAME
+    @{b}screqf_guimodes@{ub}
+
+DESCRIPTION
+    Set  this  flag  if  you  are  getting  a  screen  mode to open a user
+    interface  screen  in.   The modes shown will be standard modes with a
+    high enough resolution (minimum 640 pixels).
+
+    If this flag is set the @{"screqf_nonstdmodes" link screqf_nonstdmodes} flag is ignored.
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node screqf_nonstdmodes "RexxReqTools Constant: screqf_nonstdmodes"
+@toc rtsc_flags
+NAME
+    @{b}screqf_nonstdmodes@{ub}
+
+DESCRIPTION
+    Include  all  modes.   Unless  this flag is set @{"rtscreenmoderequest()" link rtscreenmoderequest}
+    will  exclude nonstandard modes.  Nonstandard modes are presently HAM,
+    HAM8  and  EHB  (ExtraHalfBrite).  So unless you are picking a mode do
+    some rendering in leave this flag unset.
+    Without  this  flag  set  the mode returned will be a normal bitplaned
+    mode.
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node screqf_overscangad "RexxReqTools Constant: screqf_overscangad"
+@toc rtsc_flags
+NAME
+    @{b}screqf_overscangad@{ub}
+
+DESCRIPTION
+    Add an overscan cycle gadget to the requester.
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node screqf_sizegads "RexxReqTools Constant: screqf_sizegads"
+@toc rtsc_flags
+@next screqf_sizegads
+NAME
+    @{b}screqf_sizegads@{ub}
+
+DESCRIPTION
+    Add  width  and  height gadgets to the @{"screen mode requester" link rtscreenmoderequest}.  If you
+    do  not  add  these gadgets the width and  height returned will be the
+    default width and height for the selected overscan type.
+
+TAG
+    @{"rtsc_flags" link rtsc_flags}
+@endnode
+
+@node vreqf_alldisks "RexxReqTools Constant: vreqf_alldisks"
+@toc rtfi_volumerequest
+@prev vreqf_alldisks
+NAME
+    @{b}vreqf_alldisks@{ub}
+
+DESCRIPTION
+    Show  _all_  devices.   Default behavior is to show only those devices
+    which  have valid disks inserted into them.  So if you have no disk in
+    drive  DF0:   it will not show up.  Set this flag if you do want these
+    devices included.
+
+TAG
+    @{"rtfi_volumerequest" link rtfi_volumerequest}
+@endnode
+
+@node vreqf_noassigns "RexxReqTools Constant: vreqf_noassigns"
+@toc rtfi_volumerequest
+NAME
+    @{b}vreqf_noassigns@{ub}
+
+DESCRIPTION
+    Do not include the assigns in the volume list, only the real devices.
+
+TAG
+    @{"rtfi_volumerequest" link rtfi_volumerequest}
+@endnode
+
+@node vreqf_nodisks "RexxReqTools Constant: vreqf_nodisks"
+@toc rtfi_volumerequest
+@next vreqf_nodisks
+NAME
+    @{b}vreqf_nodisks@{ub}
+
+DESCRIPTION
+    Do not include devices in the volume list, just show the assigns.
+
+TAG
+    @{"rtfi_volumerequest" link rtfi_volumerequest}
+@endnode
+
+
+@node errorlist "RexxReqTools: Errors"
+@prev constantlist
+@next history
+
+  @{b}@{u}List of Errors@{ub}@{uu}
+
+This  section  contains  all  errors that RexxReqTools generators and there
+possible causes.
+
+-@{i}10/3: No memory available@{ui}
+    ·there's no memory to open font,
+    ·there's no memory to allocate file, font or screen mode requester.
+-@{i}10/5: Unmatched quote@{ui}
+    ·you  used  an  opening quote without a closing quote with a @{"tag" link tag} that
+     requires a @{"string" link tag}.
+-@{i}10/8: Unrecognized token@{ui}
+    ·you used an unknown @{"tag" link tag} in a @{"taglist" link taglist}.
+-@{i}10/17: Wrong number of arguments@{ui}
+    ·you didn't specify the required argument for @{"rtezrequest()" link rtezrequest}.
+    ·there are more then 14 tags in the tagstring,
+-@{i}10/30: Label not found@{ui}
+    ·you specified a non existent font with @{"rt_font" link rt_font}.
+-@{i}10/33: Invalid keyword@{ui}
+    ·you used an unknown @{"constant" link tag} as value for a @{"tag" link tag}.
+-@{i}10/34: Required keyword missing@{ui}
+    ·you didn't use the right format with @{"rt_font" link rt_font}.
+-@{i}10/47: Arithmetic conversion error@{ui}
+    ·you  specified  a  non  number for a number argument (@{"rtgetlong()" link rtgetlong} or
+     @{"rtpaletterequest()" link rtpaletterequest},
+    ·you specified a non number with a @{"number" link tag} @{"tag" link tag}.
+
+Of course errors can have other causes than RexxReqTools.
+@endnode
+
+
+@node history "RexxReqTools: History"
+@prev errorlist
+@next author
+
+  @{b}@{u}History@{ub}@{uu}
+
+=========================================================================
+
+  ·release 1.0 [37.19 (12.2.93)]
+    -First release.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.0a [37.20 (20.2.93)]
+
+    -It  is  now  possible  to  use  spaces  around  the equal sign in
+     @{"tagstrings" link tagstring}.
+    -Replaced some dangerous code.
+    -Removed  "idcmp_mousemoved", "idcmp_gadgetdown", "idcmp_gadgetup"
+     and  "idcmp_activewindow"  because  they  couldn't be used (don't
+     worry  if  you used these in your scripts: they still won't work,
+     but they won't cause an error).
+    -Removed  some  errors from RexxReqTools.doc, especially about the
+     ordering   of   the  @{i}directory  @{ui}  and  @{i}filename  @{ui}  arguments  for
+     @{"rtfilerequest()" link rtfilerequest}.   The   order   hasn't  been  changed  but  the
+     documentation has!!
+
+ -----------------------------------------------------------------------
+
+  ·release 1.0b [37.21 (5.3.93)]
+
+    -Negative numbers are now recognized in @{"tagstrings" link tagstring}.
+    -@{"Tagstring" link Tagstring}  parsing  has become a little (tiny) bit faster. [Next
+     release  will  hopefully  use  hashingtables  for  a  REAL  speed
+     increase.]
+
+=========================================================================
+
+  ·release 1.1 [37.29 (18.3.93)]
+
+    -NEW    FEATURE:   The   @{"file requester" link rtfilerequest}   now   allows   buffered
+     directories!!
+    -Great news for Kickstart 1.3 users: here's another good reason to
+     upgrade  to Kickstart 2.04: RexxReqTools now needs Kickstart 2.04
+     or  higher  :-).  [I  also  removed  all  the  remarks concerning
+     Kickstart 1.3 from the documentation.]
+    -This release should parse @{"tagstrings" link tagstring} faster (as promised). [It's
+     always nice to do some assembly.]
+    -Added  four new tags: @{"rtfi_matchpat" link rtfi_matchpat} and @{"rtfi_buffer" link rtfi_buffer} for the file
+     @{"requester" link rtfilerequest};    @{"rtfo_fontname" link rtfo_fontname}   and   @{"rtfo_fontheight" link rtfo_fontheight}   for   the
+     @{"font requester" link rtfontrequest}.
+    -Changed  Alerts for missing libraries to EZRequests. RexxReqTools
+     will only use an Alert if it couldn't open @{"reqtools.library" link reqtools_library}.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.1a [37.29 (7.4.93)]
+
+    -I  wrote  an AmigaGuide for RexxReqTools. I hope you will find it
+     easier to use then RexxReqTools.doc.
+    -Fixed some erroneous examples.
+
+=========================================================================
+
+  ·release 1.2 [37.34 [16.4.93)]
+
+    -NEW FEATURE: RexxReqTools now contains a @{"screen mode requester" link rtscreenmoderequest}.
+    -It  seems last version didn't handle ORing @{"constants" link tag} together in
+     @{"tagstrings" link tagstring} very well (ie. it didn't work). That's fixed now.
+    -RexxReqTools   should  now  also  return  an  error  ('no  memory
+     available') if it couldn't create the @{"compound" link compound} variables.
+    -Added new tag for all requesters: @{"rt_font" link rt_font} this allows you to use
+     different fonts with the requesters.
+
+     RexxReqTools now contains 7 functions, 44 tags and 40 constants.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.2a [37.43 (25.5.93)]
+
+    -I   forgot   to   free  the  filelist  (rtFreeFileList)  after  a
+     multiselect  (@{"freqf_multiselect" link freqf_multiselect}) filerequester. Now RexxReqTools
+     does free them.
+    -New  function  that  allows you to free the processes filebuffer:
+     @{"rtfreefilebuffer()" link rtfreefilebuffer}.
+    -Rewrote  some  things in assembly. The library is now a few bytes
+     smaller (about 400 bytes) and a zillionth of a second faster.
+    -New,  smart,  installation  script,  tries  to  use the Commodore
+     Installer  program.  When  using Workbench 2.1 or 3.0 it tries to
+     load  the  Installer from the volume Install2.1 or Install3.0 (if
+     you  are  a  smart  person  with lots of space on her/his startup
+     partition,  you'll have this program already installed in your C:
+     drawer,  the  installation  script  will  recognize this). If the
+     script  can't  find the install disk or Installer it will install
+     RexxReqTools  with a simple Shell script. (Thanks to Nico for the
+     idea.)
+
+     RexxReqTools now contains 8 functions, 44 tags and 40 constants.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.2b [37.49 (6.6.93)]
+
+    -Tags  no  know  what kind of value they take: number, constant or
+     string.  Using  the  wrong  value with a tag will cause an error.
+     Also  you  don't  have to use quotes around strings containing no
+     spaces.
+    -Added @{"error" link errorlist} checking.
+    -This   is  the  first  version  where  the  guide  contains  more
+     information than the doc.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.2c [37.51 (8.7.93)]
+
+    -The  tagstring  parser  produced  an  Enforcer hit, that's fixed.
+     (Thanks  to Franz 'Blacky' Schwarz, you were right: I just had to
+     add the '#')
+    -Added a new tag to the @{"file requester" link rtfilerequest}: @{"rtfi_initialpath" link rtfi_initialpath}.
+    -Cleaned  up  the AmigaGuide so that AmigaGuide V34 users can also
+     read it. (Seems like V34 doesn't understand @wordwrap). It was an
+     awful  job  :-(,  but it looks a lot better, even with AmigaGuide
+     V39.  I've removed RexxReqTools.doc from the distribution because
+     AmigaGuide is available to everybody (Fish 870).
+    -Final  enhancement  to  Install  script:  it  will find Installer
+     anywhere in the path of the Workbench. Script now also sets stack
+     to 10000 as needed by Installer.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.2d [37.53 (19.7.93)]  This  is  a minor  release  that only
+   fixes some bugs:
+
+    -@{"rtgetstring()" link rtgetstring}  now  checks  the  length of the input text and it
+     ignores  everything  after  the  255th character (Thanks to Franz
+     Schwartz for reporting this bug).
+    -Removed a lot of spelling mistakes from the documentation.
+
+ -----------------------------------------------------------------------
+
+  ·release 1.2e [37.71 (5.1.94)]
+
+    -TagString  parsing changed the ARexx arguments, this was not very
+     nice. Fixed. Reported by Roger Andersson.
+    -Changed the way that filerequesters link to a process a tiny bit.
+    -Added a lot of TurboText scripts that use RexxReqTools to replace
+     the  default TurboText requesters with ReqTools requesters. These
+     scripts  where  made by Magnus Holmgren, thanks Magnus. (They are
+     in the TTXARexx.lha archive in the examples drawer).
+
+=========================================================================
+
+  ·release 1.3 [37.95 (16.8.94)]
+
+    -The  library  has  almost  completly  been  rewritten. I hope all
+     crashes and Enforcer hits are gone.
+    -Added   a   new  @{"font requester" link rtfontrequest} tag:  @{"rtfo_fontstyle" link rtfo_fontstyle}  and  three
+     constants: @{"underlined" link underlined}, @{"italic" link italic} and @{"bold" link bold}.
+    -Added a new function: @{"rtscreenname" link rtscreenname}.
+    -@{"rtgetlong" link rtgetlong}  didn't return the number entered when you used one of
+     the extra gadgets to close the requester.
+    -There's  no  longer a  restriction  on  the  number of @{"tags" link tag} in a
+     @{"tagstring" link tagstring}.
+    -The guide has been cleaned up.
+@endnode
+
+
+@node author "RexxReqTools: Author"
+@prev history
+@next author
+
+  RexxReqTools was written by @{b}Rafael D'Halleweyn@{ub}.
+
+If  you  have any questions, remarks, suggestions or bug reports please let
+me  know.  You  can contact me via normal mail:
+
+                            Rafael D'Halleweyn
+                             Perckhoevelaan 17
+                             B-2610 Antwerpen
+
+                                  BELGIUM
+
+Or you can try to reach me via EMail, you can reach me at:
+
+                        amiga@suntew.ruca.ua.ac.be
+
+(but  this  is  not my own account). The suntew.ruca.ua.ac.be machine won't
+(probably) be able to receive mail the first week of septemper 1994 (you'll
+have  to  wait  until  the  second  week, or use normal mail). From October
+you'll be able to reach me at:
+
+                        Rafael.DHalleweyn@rug.ac.be
+
+(this is my own account).
+
+      [if  you  only  have  fido-access you should send a message to
+      UUCP  (2:29/777.0)  and  the  first line of the message should
+      read `To: <fill in email address>',  the second line should be
+      empty]
+
+
+I'd like to thank Nico François, who wrote @{"ReqTools" link ReqTools}, who was great support
+and  from  whom  I  stole a large part for the original documentation. Also
+thanks  to  William Hawes for @{"ARexx" link ARexx}. And another thanks to Eric Bergen for
+attracting my attention to some spelling mistakes in the guide.
+
+RexxReqTools is Copyright © Rafael D'Halleweyn. All Rights Reserved.
+@endnode
+
+
+
+@rem information nodes
+
+@node arexx "RexxReqTools: ARexx"
+@prev arexx
+@next arexx
+@{b}ARexx@{ub}  is  an  implementation of the Rexx language for the Amiga computer.
+ARexx is a powerful programming tool, but one which by virtue of its clean
+syntax and sparse vocabulary is also easy to learn and easy to use.  (From
+"ARexx User's Reference Manual".)
+
+If you want to know more about ARexx you should read an ARexx manual.
+
+ARexx is © William S. Hawes
+@endnode
+
+@node reqtools "RexxReqTools: ReqTools"
+@prev reqtools
+@next reqtools
+The  purpose  of  @{b}ReqTools@{ub} is to make it a lot quicker and easier to build
+standard  @{"requesters" link requester}  into  your  programs.   ReqTools  is  designed with
+Commodore's   style   guidelines   in   mind,  all   requesters  have  the
+look-and-feel  of  AmigaDOS  Release  2.   (From  the  README  file in the
+ReqTools distribution).
+
+ReqTools is © Nico François
+@endnode
+
+@node script "RexxReqTools: Scripts"
+@prev script
+@next script
+A @{b}script@{ub} is a small program.
+When used in this document it means an @{"ARexx" link arexx} program.
+@endnode
+
+@node show_prob "RexxReqTools: Problems with the SHOW buttons"
+@prev show_prob
+@next show_prob
+For the @{b}SHOW@{ub} buttons to work, you should install RexxReqTools and click on
+the @{"ACTIVATE SHOW BUTTONS" rxs "call addlib('rexxreqtools.library',0,-30);call rtezrequest('SHOW buttons are active')"} button on the first page of this document.
+If no @{"requester" link requester} appears after you have pressed the @{"ACTIVATE SHOW BUTTONS" rxs "call addlib('rexxreqtools.library',0,-30);call rtezrequest('SHOW buttons are active')"}
+button, then RexxReqTools or ARexx is not properly installed.
+@endnode
+
+@node compound "RexxReqTools: compound variables"
+@prev compound
+@next compound
+@{b}Stems@{ub} and  @{b}compound variables@{ub} have special properties that  allow for some
+interesting and unusual programming.  A compound symbol can be regarded as
+having  the structure  @{i}stem.n1.n2...nk @{ui} where the  leading name  is a stem
+symbol and each node @{i}n1...nk @{ui}is a fixed or simple symbol.
+
+(From ARexx User's Reference Manual)
+@endnode
+
+@node requester "RexxReqTools: Requesters"
+@prev requester
+@next requester
+@{b}Requester@{ub}  are windows that allow the user to make choices or present her
+with some information.
+RexxReqTools contains seven different requester:
+
+    @{"message requester    " link rtezrequest}
+    @{"file requester       " link rtfilerequest}
+    @{"font requester       " link rtfontrequest}
+    @{"number requester     " link rtgetlong}
+    @{"text requester       " link rtgetstring}
+    @{"color requester      " link rtpaletterequest}
+    @{"screen mode requester" link rtscreenmoderequest}
+@endnode
+
+@node reqtools_library "RexxReqTools: reqtools.library"
+@toc copyright
+@next reqtools_library
+
+@{b}reqtools.library@{ub}  is the heart of @{"ReqTools" link ReqTools}.  You should copy this file to
+your  LIBS:  directory  (if the install script of ReqTools hasn't  already
+done this for you).
+
+If  you  can't find reqtools.library in the same directory as RexxReqTools
+it's probably in the parent of this directory (ie.  RexxReqTools is a part
+of the ReqTools distribution).
+@endnode
+
+
+@node rexxsyslib_library "RexxReqTools: rexxsyslib.library"
+@prev rexxsyslib_library
+@next rexxsyslib_library
+
+@{b}rexxsyslib.library@{ub}  is  the  heart  of  @{"ARexx" link ARexx}.  You should have this file
+installed in you LIBS:  directory (if the installation hasn't already been
+done by the Commodore Workbench installation script).
+
+You can find rexxsyslib.library on a Workbench 2.0 (or higher) disk.
+@endnode
+
+@node rexxreqtools_library "RexxReqTools: rexxreqtools.library"
+@toc copyright
+#prev rexxreqtools_library
+
+@{b}rexxreqtools.library@{ub}  is  the  heart of RexxReqTools. You should copy this
+file to your LIBS: directory (if the `Install' program hasn't already done
+this for you).
+@endnode
+
+
+
+@node index "RexxReqTools: Index"
+@prev index
+@next index
+
+  @{b}@{u}Index@{ub}@{uu}
+
+  @{b}A@{ub}
+    @{"ARexx" link arexx}
+    @{"Arithmetic conversion error" link errorlist}
+    @{"author" link author}
+
+  @{b}B@{ub}
+    @{"bodytext" link bodytext}
+    @{"bold" link bold}
+    @{"buffer, file" link rtfi_buffer}
+
+  @{b}C@{ub}
+    @{"color requester" link rtpaletterequest}
+    @{"compound" link compound}
+    @{"constant" link tag}
+    @{"constants, list of" link constantlist}
+
+  @{b}D@{ub}
+    @{"Disclaimer" link disclaimer}
+
+  @{b}E@{ub}
+    @{"error" link errorlist}
+    @{"ezreqf_centertext" link ezreqf_centertext}
+    @{"ezreqf_lamigaqual" link ezreqf_lamigaqual}
+    @{"ezreqf_noreturnkey" link rtez_flags}
+
+  @{b}F@{ub}
+    @{"false" link false}
+    @{"file requester" link rtfilerequest}
+    @{"font requester" link rtfontrequest}
+    @{"Freeware" link freeware}
+    @{"freqf_changepalette" link freqf_changepalette}
+    @{"freqf_colorfonts" link freqf_colorfonts}
+    @{"freqf_fixedwidth" link freqf_fixedwidth}
+    @{"freqf_leavepalette" link freqf_leavepalette}
+    @{"freqf_multiselect" link freqf_multiselect}
+    @{"freqf_nofiles" link freqf_nofiles}
+    @{"freqf_patgad" link freqf_patgad}
+    @{"freqf_save" link freqf_save}
+    @{"freqf_scale" link freqf_scale}
+    @{"freqf_selectdirs" link freqf_selectdirs}
+    @{"freqf_style" link freqf_style}
+    @{"functions" link functions}
+
+  @{b}G@{ub}
+    @{"gadgettext" link gadgettext}
+    @{"glreqf_centertext" link glreqf_centertext}
+    @{"glreqf_highlighttext" link glreqf_highlighttext}
+    @{"gsreqf_centertext" link gsreqf_centertext}
+    @{"gsreqf_highlighttext" link gsreqf_highlighttext}
+
+  @{b}H@{ub}
+    @{"history" link history}
+
+  @{b}I@{ub}
+    @{"idcmp_diskinserted" link idcmp_diskinserted}
+    @{"idcmp_diskremoved" link idcmp_diskremoved}
+    @{"idcmp_inactivewindow" link idcmp_inactivewindow}
+    @{"idcmp_mousebuttons" link idcmp_mousebuttons}
+    @{"idcmp_rawkey" link idcmp_rawkey}
+    @{"idcmp_vanillakey" link idcmp_vanillakey}
+    @{"introduction" link introduction}
+    @{"Invalid keyword error" link errorlist}
+    @{"italic" link italic}
+
+  @{b}L@{ub}
+    @{"Label not found error" link errorlist}
+    @{"list of all constants" link constantlist}
+    @{"list of all errors" link errorlist}
+    @{"list of all functions" link functions}
+    @{"list of all tags" link taglist}
+
+  @{b}M@{ub}
+    @{"message requester" link rtezrequest}
+
+  @{b}N@{ub}
+    @{"No memory available error" link errorlist}
+    @{"number requester" link rtgetlong}
+
+  @{b}O@{ub}
+    @{"oktext" link oktext}
+
+  @{b}R@{ub}
+    @{"requester" link requester}
+    @{"Required keyword missing" link errorlist}
+    @{"reqpos_centerscr" link reqpos_centerscr}
+    @{"reqpos_centerwin" link reqpos_centerwin}
+    @{"reqpos_pointer" link reqpos_pointer}
+    @{"reqpos_topleftscr" link reqpos_topleftscr}
+    @{"reqpos_topleftwin" link reqpos_topleftwin}
+    @{"ReqTools" link reqtools}
+    @{"reqtools.library" link reqtools_library}
+    @{"resultname" link resultname}
+    @{"rexxreqtools.library" link rexxreqtools_library}
+    @{"rexxsyslib.library" link rexxsyslib_library}
+    @{"rtezrequest()" link rtezrequest}
+    @{"rtez_defaultresponse" link rtez_defaultresponse}
+    @{"rtez_flags" link rtez_flags}
+    @{"rtfilerequest()" link rtfilerequest}
+    @{"rtfi_buffer" link rtfi_buffer}
+    @{"rtfi_flags" link rtfi_flags}
+    @{"rtfi_height" link rtfi_height}
+    @{"rtfi_initialpath" link rtfi_initialpath}
+    @{"rtfi_matchpat" link rtfi_matchpat}
+    @{"rtfi_volumerequest" link rtfi_volumerequest}
+    @{"rtfontrequest()" link rtfontrequest}
+    @{"rtfo_flags" link rtfo_flags}
+    @{"rtfo_fontheight" link rtfo_fontheight}
+    @{"rtfo_fontname" link rtfo_fontname}
+    @{"rtfo_fontstyle" link rtfo_fontstyle}
+    @{"rtfo_height" link rtfo_height}
+    @{"rtfo_maxheight" link rtfo_maxheight}
+    @{"rtfo_minheight" link rtfo_minheight}
+    @{"rtfo_sampleheight" link rtfo_sampleheight}
+    @{"rtfreefilebuffer()" link rtfreefilebuffer}
+    @{"rtgetlong()" link rtgetlong}
+    @{"rtgetstring()" link rtgetstring}
+    @{"rtgl_backfill" link rtgl_backfill}
+    @{"rtgl_flags" link rtgl_flags}
+    @{"rtgl_invisible" link rtgl_invisible}
+    @{"rtgl_max" link rtgl_max}
+    @{"rtgl_min" link rtgl_min}
+    @{"rtgl_width" link rtgl_width}
+    @{"rtgs_backfill" link rtgs_backfill}
+    @{"rtgs_flags" link rtgs_flags}
+    @{"rtgs_invisible" link rtgs_invisible}
+    @{"rtgs_width" link rtgs_width}
+    @{"rtpaletterequest()" link rtpaletterequest}
+    @{"rtscreenmoderequest()" link rtscreenmoderequest}
+    @{"rtsc_flags" link rtsc_flags}
+    @{"rtsc_height" link rtsc_height}
+    @{"rtsc_maxdepht" link rtsc_maxdepth}
+    @{"rtsc_maxheight" link rtsc_maxheight}
+    @{"rtsc_maxwidth" link rtsc_maxwidth}
+    @{"rtsc_mindepth" link rtsc_mindepth}
+    @{"rtsc_minheight" link rtsc_minheight}
+    @{"rtsc_minwidth" link rtsc_minwidth}
+    @{"rt_font" link rt_font}
+    @{"rt_idcmpflags" link rt_idcmpflags}
+    @{"rt_leftoffset" link rt_leftoffset}
+    @{"rt_lockwindow" link rt_lockwindow}
+    @{"rt_pubscrname" link rt_pubscrname}
+    @{"rt_reqpos" link rt_reqpos}
+    @{"rt_screen" link rt_screen}
+    @{"rt_screentofront" link rt_screentofront}
+    @{"rt_topoffset" link rt_topoffset}
+    @{"rt_waitpointer" link rt_waitpointer}
+    @{"rt_window" link rt_window}
+
+  @{b}S@{ub}
+    @{"screen mode requester" link rtscreenmoderequest}
+    @{"screqf_overscangad" link screqf_overscangad}
+    @{"screqf_autoscrollgad" link screqf_autoscrollgad}
+    @{"screqf_depthgad" link screqf_depthgad}
+    @{"screqf_guimodes" link screqf_guimodes}
+    @{"screqf_nonstdmodes" link screqf_nonstdmodes}
+    @{"screqf_sizegads" link screqf_sizegads}
+    @{"script" link script}
+    @{"SHOW buttons don't work" link show_prob}
+
+  @{b}T@{ub}
+    @{"tag" link tag}
+    @{"tags, list of" link taglist}
+    @{"tagstring" link tagstring}
+    @{"text requester" link rtgetstring}
+    @{"true" link true}
+
+  @{b}U@{ub}
+    @{"underlined" link underlined}
+    @{"Unmatched quote error" link errorlist}
+    @{"Unrecognized token error" link errorlist}
+    @{"using RexxReqTools" link using}
+
+  @{b}V@{ub}
+    @{"vreqf_alldisks" link vreqf_alldisks}
+    @{"vreqf_noassigns" link vreqf_noassigns}
+    @{"vreqf_nodisks" link vreqf_nodisks}
+
+  @{b}W@{ub}
+    @{"Wrong number of arguments error" link errorlist}
+@endnode

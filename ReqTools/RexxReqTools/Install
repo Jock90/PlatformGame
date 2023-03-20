@@ -1,0 +1,68 @@
+; Installer installation script for RexxReqTools
+;$VER:Install RexxReqTools 37.4 (5.2.94)
+
+(set @default-dest "")
+
+(user 2)
+
+(if (< (/ (getversion) 65536) 37)
+  (
+    (abort "You must have Kickstart 2.04 or higher installed to use RexxReqTools!")
+  )
+)
+
+(complete 0)
+
+(message "\nRexxReqTools installation\n\n\n"
+         "This script installs RexxReqTools 1.3\n"
+         "on your Amiga.\n\n\n\n"
+         "RexxReqTools © 1992-1994 Rafael D'Halleweyn\n"
+         "All rights reserved."
+)
+
+(copylib
+  (prompt "\nCopying rexxreqtools.library to LIBS:...")
+  (help "rexxreqtools.library contains all the ARexx "
+        "functions to use RexxReqTools.\n"
+        "SEE ALSO: RexxReqTools.guide.\n\n"
+        @copylib-help)
+  (source "Libs/rexxreqtools.library")
+  (dest "LIBS:")
+  (confirm)
+)
+
+
+(if (exists "Libs/reqtools.library")
+  (
+    (complete 45)
+
+    (copylib
+      (prompt "\nCopying reqtools.library to LIBS:...")
+      (help @copylib-help)
+      (source "Libs/reqtools.library")
+      (dest "LIBS:")
+      (confirm)
+    )
+  )
+)
+
+(complete 90)
+
+(startup
+  "RexxReqTools"
+  (prompt "\n\nAdd rexxreqtools.library to the ARexx Library List?\n\n"
+          "(NOTE: this will add a \"RXLIB\" command to the User-Startup)")
+  (help "To use RexxReqTools you have to tell ARexx about this new library. "
+        "You can do these with the\n"
+        "  RXLIB rexxreqtools.library 0 -30\n"
+        "command.\n"
+        "SEE ALSO: RexxReqTools.guide or .doc\n\n"
+        @startup-help)
+  (command "RXLIB >NIL: rexxreqtools.library 0 -30")
+)
+
+(complete 100)
+(exit)
+
+; that'll keep him happy
+(welcome)
