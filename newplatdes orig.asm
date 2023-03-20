@@ -7243,10 +7243,10 @@ maskbuffer	dcb.w	16*4
 
 
 
-bobdata		incbin	"PCProg:bobs_16col_.ilbm"
-mask		incbin	"PCProg:bobs_16col_.m"
-blockdata	incbin	"PCProg:blockscreen.ILBM"
-sfx		incbin	"PCProg:PlatSFX/sfx"
+bobdata		incbin	"PC:bobs_16col_.ilbm"
+mask		incbin	"PC:bobs_16col_.m"
+blockdata	incbin	"PC:blockscreen.ILBM"
+sfx		incbin	"PC:sfx"
 		
 ;bobdata		incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/bobs_16col_.ilbm"
 ;mask		incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/bobs_16col_.m"
