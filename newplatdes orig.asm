@@ -7092,11 +7092,11 @@ intfdflag	dc.w	0
 testword	dc.w	0
 
 
-crunchscrns	incbin	"PCProg:Data/PlatGFX/crunchscreens.lev_1"
-colloffset	incbin	"PCProg:Data/PlatGFX/collisiontable"
-font		incbin	"PCProg:Data/PlatGFX/gamefont.R"
-blocktypetab	incbin	"PCProg:Data/PlatGFX/blocktypetab"
-blockinfotab	incbin	"PCProg:Data/PlatGFX/blockinfotab"	
+crunchscrns	incbin	"PC:crunchscreens.lev_1"
+colloffset	incbin	"PC:collisiontable"
+font		incbin	"PC:gamefont.R"
+blocktypetab	incbin	"PC:blocktypetab"
+blockinfotab	incbin	"PC:blockinfotab"	
 
 ;crunchscrns	incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/crunchscreens.lev_1"
 ;colloffset	incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/collisiontable"
@@ -7243,10 +7243,10 @@ maskbuffer	dcb.w	16*4
 
 
 
-bobdata		incbin	"PCProg:Data/PlatGFX/bobs_16col_.ilbm"
-mask		incbin	"PCProg:Data/PlatGFX/bobs_16col_.m"
-blockdata	incbin	"PCProg:Data/PlatGFX/blockscreen.ILBM"
-sfx			incbin	"PCProg:Data/PlatSFX/sfx"
+bobdata		incbin	"PCProg:bobs_16col_.ilbm"
+mask		incbin	"PCProg:bobs_16col_.m"
+blockdata	incbin	"PCProg:blockscreen.ILBM"
+sfx		incbin	"PCProg:PlatSFX/sfx"
 		
 ;bobdata		incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/bobs_16col_.ilbm"
 ;mask		incbin	"J:\A1200 WinUAE Folder/Data/PlatGFX/bobs_16col_.m"
