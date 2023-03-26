@@ -4,6 +4,23 @@ My aims are to use VS-Code and the excellent Amiga Assembly to continue playing 
 
 There are some nice features defining the gfx blocks and the features of the sprite driver, so it would be good to tidy things up here and expand the features. 
 
+[Update 26/03/23]
+While the demo does work in WinUAE and on a real A1200 via the instructions further below, it now also now runs in the Amiga Assembly extension in VS-Code. Two additions to the tasks.json args section of vasm are required..."-no-opt" and "-nocase", as below :-
+
+			"vasm": {
+				"enabled": true,
+				"command": "${config:amiga-assembly.binDir}/vasmm68k_mot",
+				"args": [
+					"-m68000",
+					"-no-opt",
+					"-Fhunk",
+					"-linedebug",
+					"-nocase"
+				]
+
+The source file contains some labels with multiple case versions, hence "-nocase" is needed, and vasm is optimising by default which is causing issues, hence "-no-opt" is also needed. Back in the day, I always wanted a direct 1:1 with assembly to machine code (to help with opcode learning, and debugging).
+
+
 
 The utility will run on real A1200 or inside WinUAE. There is a small demo game included.
 
